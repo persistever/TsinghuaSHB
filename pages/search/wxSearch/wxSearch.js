@@ -91,8 +91,10 @@ function wxSearchFocus(e, that, callBack) {
   var temData = that.data.wxSearchData;
   temData.view.isShow = true;
   that.setData({
-    wxSearchData: temData
+    wxSearchData: temData,
+    searchBackHidden:true
   });
+  console.log(that.data.searchBackHidden)
   //回调
   if (typeof (callBack) == "function") {
     callBack();
@@ -110,8 +112,10 @@ function wxSearchBlur(e, that, callBack) {
   var temData = that.data.wxSearchData;
   temData.value = e.detail.value;
   that.setData({
-    wxSearchData: temData
+    wxSearchData: temData,
+    searchBackHidden: false
   });
+  console.log(that.data.searchBackHidden)
   if (typeof (callBack) == "function") {
     callBack();
   }

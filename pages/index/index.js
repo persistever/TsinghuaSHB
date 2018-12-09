@@ -33,7 +33,7 @@ Page({
     let id = e.currentTarget.dataset.id,
       index = parseInt(e.currentTarget.dataset.index)
     this.curIndex = parseInt(e.currentTarget.dataset.index)
-    console.log(e)
+    console.log(this.curIndex)
     var that = this
     this.setData({
       curNavId: id,
@@ -67,7 +67,6 @@ Page({
     })
   },
   wxToSearchTap: function () {
-    console.log("111")
     wx.navigateTo({
       url: '../search/search',
     })
