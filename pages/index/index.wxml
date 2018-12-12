@@ -44,8 +44,8 @@
             <view class="nav_section_items" >
                 <!--image-->
                 <view class="section_image" bindtap="navigateDetail" data-aid="{{item.id}}">
-                <block wx:if="{{item.coverpath}}">
-                    <image src="{{item.coverpath}}" mode="aspectFill"></image>
+                <block wx:if="{{item.coverPath}}">
+                    <image src="{{item.coverPath}}" mode="aspectFill"></image>
                 </block>
                 <block wx:else>
                     <image src="../../images/default_pic.png" mode="aspectFill"></image>
@@ -57,7 +57,7 @@
                         <text>{{item.subject}}</text>
                     </view>
                     <view class="section_cont_price">价格：{{item.price}}</view>
-                    <view>{{item.message}}</view>
+                    <view>{{item.courseName}}</view>
                 </view>
                 <!--book-->
                 <view class="section_book" bindtap="bookTap" data-aid="{{item.id}}">

@@ -1,11 +1,11 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/search/search",
-    "pages/search/wxSearch/wxSearch",
     "pages/publish/publish",
     "pages/message/message",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/search/search",
+    "pages/search/wxSearch/wxSearch"
   ],
   "window": {
     "backgroundTextStyle": "dark",
