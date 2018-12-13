@@ -5,7 +5,9 @@
     "pages/search/wxSearch/wxSearch",
     "pages/publish/publish",
     "pages/message/message",
-    "pages/profile/profile"
+    "pages/profile/profile",
+    "pages/detail/detail",
+    "pages/chat/chat"
   ],
   "window": {
     "backgroundTextStyle": "dark",
