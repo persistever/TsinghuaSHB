@@ -1,4 +1,5 @@
 <!--pages/publish/publish.wxml-->
+<text>{{netTestValue}}</text>
 <view class="container">
     <view class="ar_cont">
         <text class="ar_cont_h1">请输入资料名</text>

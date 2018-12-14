@@ -1,5 +1,5 @@
 // pages/publish/publish.js
-
+var app = getApp()
 
 Page({
 
@@ -11,7 +11,9 @@ Page({
     courseName: "课程名",
     price: "价格",
     subject: "资料名",
-    bookToastHidden:true
+    bookToastHidden:true,
+    useServer: app.globalData.useServer,
+    serverURL: app.globalData.serverURL,
   },
 
   /**
@@ -35,17 +37,16 @@ Page({
   onShow: function () {
     var that = this
     wx.request({
-      url: 'http://localhost:80/TsinghuaSHB/data.php',
+      url: that.data.serverURL+'data.php',
       data: {
-        key1: 10,
-        key2: 'helloworld'
+        netTestValue: '后台访问失败',
       },
       success: function (res) {
-        console.log("success")
-        console.log(res.data)
-        console.log(res.statusCode)
+        // console.log("success")
+        //console.log(res.data)
+        // console.log(res.statusCode)
         that.setData({
-          netTestValue: res.data['key1']
+          netTestValue: res.data['netTestValue']
         })
 
       },
@@ -53,7 +54,7 @@ Page({
         console.log("fail")
       },
       complete: function () {
-        console.log("complete")
+        //console.log("complete")
       }
     })
   },
@@ -99,7 +100,7 @@ Page({
       success(res) {
         const tempFilePaths = res.tempFilePaths
         wx.uploadFile({
-          url: 'http://localhost:80/TsinghuaSHB/uploadphoto.php',
+          url: that.data.serverURL+'uploadphoto.php',
           filePath: tempFilePaths[0],
           name: 'file',
           formData: {
@@ -107,6 +108,7 @@ Page({
             courseName: that.data.courseName,
             price: that.data.price,
             subject: that.data.subject,
+            useServer: that.data.useServer,
           },
           success(res) {
             console.log("it's good!")
@@ -114,9 +116,6 @@ Page({
             console.log(data)
             that.setData({
               netTestValue: "上传成功!"
-            })
-            wx.reLaunch({
-              url: '../index/index'
             })
           }
         })
@@ -145,6 +144,9 @@ Page({
     this.setData({
       // show the success icon 
       bookToastHidden: false
+    })
+    wx.reLaunch({
+      url: '../index/index'
     })
   },
   hideToast: function () {

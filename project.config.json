@@ -8,12 +8,13 @@
 		"es6": true,
 		"postcss": true,
 		"minified": true,
-		"newFeature": true
+		"newFeature": true,
+		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.2",
+	"libVersion": "2.4.0",
 	"appid": "wx64bd3cfc861a6519",
-	"projectname": "THbook",
+	"projectname": "TsinghuaSHB_Stable",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
