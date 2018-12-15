@@ -36,4 +36,11 @@ App({
       // })
     }
   },
+  globalData: {
+    userInfo: null,
+    useServer: 1,
+    serverURL: 'https://tsinghuashb.idlab-tsinghua.com/TsinghuaSHB/'
+    //useServer: 0,
+    //serverURL: 'localhost/TsinghuaSHB/'
+  }
 })

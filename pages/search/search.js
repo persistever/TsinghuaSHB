@@ -51,6 +51,12 @@ Page({
     var that = this
     WxSearch.wxSearchHiddenPancel(that);
   },
+  
+  // do something to jump to another page
+  bookTap: function(e){
+
+  },
+
   // Modify this function to interact with database
   wxSearchBack: function(e) {
     // do something for searching with searchText and return an arr
@@ -58,16 +64,16 @@ Page({
     console.log(searchText)
     var arr = [
         {
-          subject: "火力发电厂水资源1",
-          coverpath: "../../images/example.jpg",
-          price: '¥25',
-          message: '火力发电厂水资源教材'
+          itemName: "火力发电厂水资源1",
+          itemPicturePath: "../../images/example.jpg",
+          itemPrice: '¥25',
+          itemShortInfo: '火力发电厂水资源教材'
         },
         {
-          subject: "火力发电厂水资源2",
-          coverpath: "../../images/example.jpg",
-          price: '¥25',
-          message: '火力发电厂水资源教材'
+          itemName: "火力发电厂水资源2",
+          itemPicturePath: "../../images/example.jpg",
+          itemPrice: '¥25',
+          itemShortInfo: '火力发电厂水资源教材'
         },
       ]
     this.setData({

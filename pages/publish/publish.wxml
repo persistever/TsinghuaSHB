@@ -2,26 +2,99 @@
 <text>{{netTestValue}}</text>
 <view class="container">
     <view class="ar_cont">
-        <text class="ar_cont_h1">请输入资料名</text>
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
-            <input bindinput="wxGetName" value="{{wxSearchData.value}}"                 class="input_msg" />
+            <text class="publish_text">资料名</text>
+            <input bindinput="wxGetItemName" class="input_msg" type="text" maxlength="100"/>
           </view>
         </view>
-        <text class="ar_cont_h1">请输入课程名</text>
+
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
-          <input bindinput="wxGetCourseName" value="{{wxSearchData.value}}" class="input_msg" />
+          <text class="publish_text">价格(不可高于1000元) </text>
+          <input bindinput="wxGetItemPrice" class="input_msg" type="digit" value="{{itemPrice}}"/>
           </view>
         </view>
-        <text class="ar_cont_h1">请输入价格</text>
+
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
-          <input bindinput="wxGetPrice" value="{{wxSearchData.value}}"                class="input_msg" />
+          <text class="publish_text">简介 </text>
+          <input bindinput="wxGetItemShortInfo" class="input_msg" type="text" maxlength="100" />
           </view>
         </view>
+
+        <view class="wxSearch-section">
+          <picker bindchange="wxGetItemSubject"  value="{{itemSubject}}" range="{{itemSubjectList}}">
+          <text class="publish_text">主题 </text>
+          <view class="tui-picker-detail">{{itemSubjectList[itemSubject]}}</view>
+          </picker>
+        </view>
+
+        <view class="wxSearch-section">
+          <picker mode="multiSelector" bindchange="wxGetItemSort" bindcolumnchange="wxGetItemSortColumnChange" value="{                       {itemSort}}" range="{{itemSortArray}}">
+            <view class="publish_text">类型</view>
+            <view class="tui-picker-detail">
+            {{itemSortArray[0][itemSort[0]]}}，{{itemSortArray[1][itemSort[1]]}}
+            </view>
+          </picker>
+        </view>
+
+        <view class="wxSearch-section">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">详情 </text>
+          <input bindinput="wxGetItemInfo" class="input_msg" type="text" maxlength="200" />
+          </view>
+        </view>
+
+        <view class="wxSearch-section">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">出版社 </text>
+          <input bindinput="wxGetItemPublisher" class="input_msg" type="text" maxlength="50" />
+          </view>
+        </view>
+
+        <view class="wxSearch-section">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">版次 </text>
+          <input bindinput="wxGetItemPublishVersion" class="input_msg" type="text" maxlength="10" />
+          </view>
+        </view>
+
+        <view class="wxSearch-section" wx:if="{{[itemSort[0]]==0}}">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">课程名</text>
+          <input bindinput="wxGetItemCourseName" class="input_msg" type="text" maxlength="100"/>
+          </view>
+        </view>
+
+        <view class="wxSearch-section" wx:if="{{[itemSort[0]]==0}}">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">课程号</text>
+          <input bindinput="wxGetItemCourseNO" class="input_msg" type="text" maxlength="20"/>
+          </view>
+        </view>
+
+        <view class="wxSearch-section" wx:if="{{[itemSort[0]]==0}}">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">授课教师</text>
+          <input bindinput="wxGetItemCourseTeacher" class="input_msg" type="text" maxlength="50"/>
+          </view>
+        </view>
+
+        <!-- 图片缩略图  -->
+        <view class="images">
+          <block wx:for="{{itemPicturePath}}" wx:key="*this">
+            <view class="image-wrap">
+              <!-- 图片缩略图  -->
+              <image class="image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
+              <!-- 移除图片的按钮  -->
+              <view class="image-remover" data-idx="{{index}}" bindtap="removeImage">删除</view>
+            </view>
+          </block>
+        </view>
+
         <view>
-          <button class="wxSearch-button" bindtap="wxToUploadPhoto"                   size="mid" plain="true">上传图片</button>
+          <button class="wxSearch-button" bindtap="wxToUploadPhoto" size="mid" plain="true" wx:if="{{itemPicturePath.length < 3}}">上传图片</button>
         </view>
 
         <button class="ar_book" bindtap="bindToastTap">确认发布</button>
