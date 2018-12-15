@@ -26,7 +26,6 @@ Page({
     bookToastHidden:true,
     useServer: app.globalData.useServer,
     serverURL: app.globalData.serverURL,
-
   },
 
   /**
@@ -140,6 +139,26 @@ Page({
         //    })
         //  }
         //})
+        wx.uploadFile({
+          url: that.data.serverURL+'uploadphoto.php',
+          filePath: tempFilePaths[0],
+          name: 'file',
+          formData: {
+            email: 'test@mails.tsinghua.edu.cn',
+            courseName: that.data.courseName,
+            price: that.data.price,
+            subject: that.data.subject,
+            useServer: that.data.useServer,
+          },
+          success(res) {
+            console.log("it's good!")
+            const data = res.data
+            console.log(data)
+            that.setData({
+              netTestValue: "上传成功!"
+            })
+          }
+        })
       }
     })
   },

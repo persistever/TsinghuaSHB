@@ -159,7 +159,7 @@ Page({
   // 跳转至详情页
   navigateDetail: function (e) {
     wx.navigateTo({
-      url: '../detail/detail?artype=' + e.currentTarget.dataset.artype
+      url: '../detail/detail?itemID=' + e.currentTarget.dataset.itemID
     })
   },
   // 加载更多
@@ -173,12 +173,6 @@ Page({
     that.data.navSectionItems[curid] = that.data.navSectionItems[curid].concat(that.data.navSectionItems[curid])
     that.setData({
       list: that.data.navSectionItems,
-    })
-  },
-  // book
-  bookTap: function (e) {
-    wx.navigateTo({
-      url: '../book/book?aid=' + e.currentTarget.dataset.aid
     })
   },
   wxToSearchTap: function () {

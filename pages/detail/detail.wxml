@@ -4,8 +4,7 @@
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
   <!--banner-->
   <view class="swiper">
-    <swiper indicator-dots="{{indicatorDots}}" vertical="{{vertical}}"
-            autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" >
       <block wx:for-items="{{img_url}}" wx:key="item.id">
         <swiper-item>
           <image src="{{item}}"  mode="aspectFit"/>
@@ -15,8 +14,10 @@
   </view>
 <view>{{book_name}}</view>
 <view>
-  <text>报价:</text>
-  {{book_price}}
+  <text>报价:{{book_price}}</text>
+</view>
+<view>
+  <text>出版社:{{book_pub}}</text>
 </view>
 <view>
   <button class="save-button" bindtap="saveTap" size="mini" plain="true">收藏</button>

@@ -17,6 +17,8 @@ Page({
     useServer: app.globalData.useServer,
     serverURL: app.globalData.serverURL,
     code: null,
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    haveAuth: false
   },
 
   /**
@@ -126,6 +128,13 @@ Page({
   bindVerifyCodeButton: function(){
     wx.reLaunch({
       url: '../index/index'
+    })
+  },
+  bindGetUserInfo(e) {
+    var that=this
+    console.log(e.detail.userInfo)
+    that.setData({
+      haveAuth: true
     })
   }
 })
