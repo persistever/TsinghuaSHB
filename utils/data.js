@@ -40,42 +40,42 @@ function getIndexNavSectionData(){
     var arr = [
                 [
                     {
-                        subject:"火力发电厂水资源1",
-                        coverpath:"../../images/example.jpg",
-                        price:'¥25',
-                        message:'火力发电厂水资源教材'
+                        itemName:"火力发电厂水资源1",
+                        itemPicturePath:"../../images/example.jpg",
+                        itemPrice:'¥25',
+                        itemShortInfo:'火力发电厂水资源教材'
                     },
                 ],
                 [
                   {
-                    subject: "火力发电厂水资源2",
-                    coverpath: "../../images/example.jpg",
-                    price: '¥25',
-                    message: '火力发电厂水资源教材'
+                    itemName: "火力发电厂水资源2",
+                    itemPicturePath: "../../images/example.jpg",
+                    itemPrice: '¥25',
+                    itemShortInfo: '火力发电厂水资源教材'
                   },
                 ],
                 [
                   {
-                    subject: "火力发电厂水资源3",
-                    coverpath: "../../images/example.jpg",
-                    price: '¥25',
-                    message: '火力发电厂水资源教材'
+                    itemName: "火力发电厂水资源3",
+                    itemPicturePath: "../../images/example.jpg",
+                    itemPrice: '¥25',
+                    itemShortInfo: '火力发电厂水资源教材'
                   },
                 ],
                 [
                   {
-                    subject: "火力发电厂水资源4",
-                    coverpath: "../../images/example.jpg",
-                    price: '¥25',
-                    message: '火力发电厂水资源教材'
+                    itemName: "火力发电厂水资源4",
+                    itemPicturePath: "../../images/example.jpg",
+                    itemPrice: '¥25',
+                    itemShortInfo: '火力发电厂水资源教材'
                   },
                 ],
                 [
                   {
-                    subject: "火力发电厂水资源5",
-                    coverpath: "../../images/example.jpg",
-                    price: '¥25',
-                    message: '火力发电厂水资源教材'
+                    itemName: "火力发电厂水资源5",
+                    itemPicturePath: "../../images/example.jpg",
+                    itemPrice: '¥25',
+                    itemShortInfo: '火力发电厂水资源教材'
                   },
                 ] 
             ]

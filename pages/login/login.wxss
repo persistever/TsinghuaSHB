@@ -1,0 +1,69 @@
+/* pages/login/login.wxss */
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+.background{
+  width:100%;
+  height:100%;
+  background-color: purple;
+
+}
+.userIcon{
+  width: 150rpx;
+  height: 150rpx;
+  margin-left:auto;
+  margin-right:auto;
+  border:5px solid #ddd; 
+  border-radius:30rpx;  
+}
+.inputEmail{
+  width:30%;
+  height:70rpx;
+  margin-left:50rpx;
+  border:1px solid #ddd; 
+  border-radius:8rpx;
+  padding:0rpx 10rpx;
+  background-color: white;
+}
+.chooseEmailDomain{
+  width:57%;
+  height:70rpx;
+  margin-left:10rpx;
+  margin-right:auto;
+  background-color:#ddd;
+  border:1px solid #ddd; 
+  border-radius:8rpx;
+  line-height: 70rpx;
+}
+.requireCodeButton{
+  width:40%;
+  height:60rpx;
+  margin-left:auto;
+  margin-right:auto;
+  border:1px solid #ddd; 
+  border-radius:8rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 60rpx;
+}
+.verifyCode{
+  width:30%;
+  height:60rpx;
+  margin-left:160rpx;
+  border:1px solid #ddd; 
+  border-radius:8rpx;
+  padding:0rpx 10rpx;
+  background-color: white;
+}
+.verifyCodeButton{
+  width:20%;
+  height:60rpx;
+  margin-left:20rpx;
+  border:1px solid #ddd; 
+  border-radius:8rpx;
+  font-size: 30rpx;
+  text-align: center;
+  line-height: 60rpx;
+}

@@ -1,5 +1,61 @@
 /* pages/publish/publish.wxss */
 @import "../search/wxSearch/wxSearch.wxss";
+
+
+.images-area {
+  padding: 40rpx 0;
+}
+
+.images-tool {
+  display: flex;
+  align-items: center;
+}
+
+.images {
+  display: flex;
+  align-items: center;
+  margin-top: 40rpx;
+}
+
+.image-wrap {
+  width: 31%;
+  margin-right: 10rpx;
+}
+
+.image {
+  flex: 1;
+  height: 200rpx;
+  width: 100%;
+}
+
+.image-remover {
+  text-align: center;
+}
+.tui-picker-content{
+  padding: 30rpx;
+  text-align: center;
+}
+.tui-picker-name{
+  height: 80rpx;
+  line-height: 80rpx;
+}
+.tui-picker-detail{
+  display:flex;
+  height: 80rpx;
+  line-height: 80rpx;
+  background-color: rgb(230, 248, 196);
+  font-size: 35rpx;
+  padding: 0 10px;
+  overflow: hidden;
+}
+
+.publish_text{
+  display: flex;
+  font-size: 32rpx;
+  font-weight: 600;
+  line-height: 64rpx;
+  color:#000;
+}
 .container{
     background:#fff;
 }
