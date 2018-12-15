@@ -17,19 +17,20 @@ Page({
     useServer: app.globalData.useServer,
     serverURL: app.globalData.serverURL,
     code: null,
+    inputCode: null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    haveAuth: false
+    haveAuth: false,
+    haveRegister: false,
+    timer: null,
+    countDownNum: 60,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('hello')
-    console.log(app.globalData.userInfo)
     wx.getSetting({
       success(res) {
-        console.log(res.authSetting)
         // res.authSetting = {
         //   "scope.userInfo": true,
         //   "scope.userLocation": true
@@ -98,21 +99,25 @@ Page({
   },
   bindRequireCodeButton: function(){
     var that=this
+    var nickName = app.globalData.userInfo['nickName']
+    app.globalData.userEmail = that.data.emailAddress + that.data.domainArray[that.data.domainIndex]
     this.setData({
       requireCodeStatus: 1,
       requireCodeButtonDisable: true,
-      emailAddress: that.data.emailAddress+that.data.domainArray[that.data.domainIndex]
+      emailAddress: app.globalData.userEmail
     })
-    console.log(this.data.emailAddress)
+    this.countDown(that.data.countDownNum)
+    //console.log(this.data.emailAddress)
     wx.request({
-      url: that.data.serverURL+'emailCode.php',
+      url: that.data.serverURL +"emailCode.php",
       data: {
-        emailAddresss: that.data.emailAddress
+        emailAddress: that.data.emailAddress,
+        nickName: nickName,
       },
       success: function (res) {
-        console.log("success")
-        console.log(res.data)
-        console.log(res.statusCode)
+        //console.log("success")
+        //console.log(res.data)
+        //console.log(res.statusCode)
         that.setData({
           code: res.data['code']
         })
@@ -121,20 +126,159 @@ Page({
         console.log("fail")
       },
       complete: function () {
-        console.log("complete")
+        //console.log("complete")
       }
     })
   },
-  bindVerifyCodeButton: function(){
-    wx.reLaunch({
-      url: '../index/index'
+  bindGetUserInfo(e) {
+    var that = this
+    console.log(e.detail.userInfo)
+    app.globalData.userInfo = e.detail.userInfo
+    console.log(app.globalData.userInfo)
+    app.globalData.userNickName=e.detail.userInfo['nickName']
+    console.log(app.globalData.userNickName)
+    wx.login({
+      success: function (res1) {
+        if (res1.code) {
+          that.setData({
+            haveAuth: true
+          })
+          // 发起网络请求
+          wx.request({
+            url: 'https://api.weixin.qq.com/sns/jscode2session?' +
+              'appid=' + 'wx64bd3cfc861a6519' +
+              '&secret=' + '3001107d014a9aa432e0b50a2cd6c10a' +
+              '&js_code=' + res1.code +
+              '&grant_type=authorization_code',
+            method: 'POST',
+            success: function (res2) {
+              console.log('[login.js][code换取session_key请求] success ')
+              console.log(res2)
+              app.globalData.userOpenID = res2.data['openid']
+              console.log(app.globalData.userOpenID)
+            },
+            fail: function () {
+              console.log('[app.js][code换取session_key请求] failed ')
+            },
+            complete: function () {
+              //console.log('[app.js][code换取session_key请求] complete ')
+              wx.request({
+                url: app.globalData.serverURL + 'login.php',
+                data: {
+                  userOpenID: app.globalData.userOpenID,
+                  userNickName: app.globalData.userNickName,
+                  useServer: app.globalData.useServer,
+                },
+                success: function (res3) {
+                  console.log('[login.js][查看是否已注册] success ')
+                  console.log(res3)
+                  if (res3.data['haveRegister'] == true) {
+                    app.globalData.userEmail = res3.data['userEmail']
+                    app.globalData.userID = res3.data['userID'];
+                    console.log('[login.js][查看是否已经有了用户所有信息]')
+                    console.log(app.globalData)
+                    wx.reLaunch({
+                      url: '../index/index'
+                    })
+                  }
+                  //userInfo = res.
+                  //wx.setStorageSync('res', userInfo)
+                },
+                fail: function () {
+                  console.log('[app.js][查看是否已注册] failed ')
+                },
+                complete: function () {
+                  //console.log('[app.js][查看是否已注册] complete ')
+                }
+              })
+            }
+          })
+        } else {
+          console.log('登录失败！' + res.errMsg)
+        }
+      }
+    })
+    
+  },
+  bindGetInputCode(e){
+    var that = this
+    that.setData({
+      codeInput: e.detail.value
     })
   },
-  bindGetUserInfo(e) {
-    var that=this
-    console.log(e.detail.userInfo)
+  bindVerifyCodeButton: function () {
+    var that = this
+    if (that.data.code == that.data.codeInput) {
+      wx.request({
+        url: app.globalData.serverURL + 'register.php',
+        data: {
+          userOpenID: app.globalData.userOpenID,
+          userNickName: app.globalData.userNickName,
+          userEmail: app.globalData.userEmail,
+          useServer: app.globalData.useServer,
+        },
+        success: function (res) {
+          console.log('[login.js][对用户进行注册] success ')
+          console.log(res)
+          //userInfo = res.
+          //wx.setStorageSync('res', userInfo)
+          if(res.data['haveRegister']){
+            wx.reLaunch({
+              url: '../index/index'
+            })
+          }
+          else{
+            wx.showToast({
+              title: "注册失败，请稍后再试!",
+              icon: 'none',
+              duration: 2000
+            })
+          }
+        },
+        fail: function () {
+          console.log('[login.js][对用户进行注册] failed ')
+        },
+        complete: function () {
+          //console.log('[login.js][对用户进行注册] complete ')
+        }
+      })
+    }
+    else {
+      wx.showToast({
+        title: "验证码错误!",
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
+
+
+  countDown: function (timeSecond) {
+    var that = this;
+    var countDownNum = timeSecond;//获取倒计时初始值
+    //如果将定时器设置在外面，那么用户就看不到countDownNum的数值动态变化，所以要把定时器存进data里面
     that.setData({
-      haveAuth: true
+      timer: setInterval(function () {//这里把setInterval赋值给变量名为timer的变量
+        //每隔一秒countDownNum就减一，实现同步
+        countDownNum--;
+        //然后把countDownNum存进data，好让用户知道时间在倒计着
+        that.setData({
+          countDownNum: countDownNum
+        })
+        //在倒计时还未到0时，这中间可以做其他的事情，按项目需求来
+        if (countDownNum == 0) {
+          //这里特别要注意，计时器是始终一直在走的，如果你的时间为0，那么就要关掉定时器！不然相当耗性能
+          //因为timer是存在data里面的，所以在关掉时，也要在data里取出后再关闭
+          that.setData({
+            countDownNum: 60,
+            requireCodeStatus: 0,
+            requireCodeButtonDisable: false
+          })
+          clearInterval(that.data.timer)
+          //关闭定时器之后，可作其他处理codes go here
+        }
+      }, 1000)
     })
   }
+
 })

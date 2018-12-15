@@ -70,7 +70,7 @@
         <view class="wxSearch-section" wx:if="{{[itemSort[0]]==0}}">
           <view class="wxSearch-pancel">
           <text class="publish_text">课程号</text>
-          <input bindinput="wxGetItemCourseNO" class="input_msg" type="text" maxlength="20"/>
+          <input bindinput="wxGetItemCourseNO" class="input_msg" type="text" maxlength="50"/>
           </view>
         </view>
 
@@ -97,7 +97,7 @@
           <button class="wxSearch-button" bindtap="wxToUploadPhoto" size="mid" plain="true" wx:if="{{itemPicturePath.length < 3}}">上传图片</button>
         </view>
 
-        <button class="ar_book" bindtap="bindToastTap">确认发布</button>
+        <button class="ar_book" bindtap="bindPublish">确认发布</button>
         
         <toast hidden="{{bookToastHidden}}"  bindchange="hideToast">
         发布成功

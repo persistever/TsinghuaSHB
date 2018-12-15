@@ -38,7 +38,7 @@
   line-height: 70rpx;
 }
 .requireCodeButton{
-  width:40%;
+  width:50%;
   height:60rpx;
   margin-left:auto;
   margin-right:auto;
@@ -51,14 +51,14 @@
 .verifyCode{
   width:30%;
   height:60rpx;
-  margin-left:160rpx;
+  margin-left:130rpx;
   border:1px solid #ddd; 
   border-radius:8rpx;
   padding:0rpx 10rpx;
   background-color: white;
 }
 .verifyCodeButton{
-  width:20%;
+  width:30%;
   height:60rpx;
   margin-left:20rpx;
   border:1px solid #ddd; 

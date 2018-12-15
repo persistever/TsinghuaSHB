@@ -1,4 +1,0 @@
-<!--pages/message/message.wxml-->
-<scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
-
-</scroll-view>

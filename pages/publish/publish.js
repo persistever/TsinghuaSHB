@@ -8,18 +8,18 @@ Page({
    */
   data: {
     netTestValue: "后台访问失败",
+    itemID: null,
     itemCourseName: "",
     itemName: "",
     itemPrice: "",
     itemShortInfo: "",
-    itemSubjectList: ["推荐", "理科", "工科", "文科", "其它"],
-    itemSubject: 1,
+    itemSubjectList: ["理科", "工科", "文科", "其它"],
+    itemSubject: 0,
     itemSortArray: [["课程资料", "非课程资料"], ["课本","讲义","作业","参考书","其他"]],
     itemSort: [0, 0],
     itemInfo: "",
     itemPublisher: "",
     itemPublishVersion: "",
-    itemCourseName: "",
     itemCourseNO: "",
     itemCourseTeacher: "",
     itemPicturePath: [],
@@ -32,8 +32,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
-
+    
   },
 
   /**
@@ -49,7 +48,7 @@ Page({
   onShow: function () {
     var that = this
     wx.request({
-      url: that.data.serverURL+'data.php',
+      url: that.data.serverURL + 'data.php',
       data: {
         netTestValue: '后台访问失败',
       },
@@ -109,56 +108,27 @@ Page({
   wxToUploadPhoto: function () {
     var that = this
     wx.chooseImage({
-      sizeType: ['original', 'compressed'],  //可选择原图或压缩后的图片
-      sourceType: ['album', 'camera'], //可选择性开放访问相册、相机
+      count: 3 - that.data.itemPicturePath.length,
+      sizeType: ['compressed'], //目前先只支持缩略图，'original'原图上传下载都比较慢
+      sourceType: ['album', 'camera'],
       success(res) {
         const tempFilePaths = res.tempFilePaths
-        const images = that.data.itemPicturePath.concat(res.tempFilePaths)
-        // 限制最多只能留下3张照片
-        that.setData({
-          itemPicturePath: images.length <= 3 ? images : images.slice(0, 3)
-        });
-
-        //wx.uploadFile({
-        //  url: that.data.serverURL+'uploadphoto.php',
-        //  filePath: tempFilePaths[0],
-        //  name: 'file',
-        //  formData: {
-        //    email: 'test@mails.tsinghua.edu.cn',
-        //    courseName: that.data.courseName,
-        //    price: that.data.price,
-        //    subject: that.data.subject,
-        //    useServer: that.data.useServer,
-        //  },
-        //  success(res) {
-        //    console.log("it's good!")
-        //    const data = res.data
-        //    console.log(data)
-        //    that.setData({
-        //      netTestValue: "上传成功!"
-        //    })
-        //  }
-        //})
-        wx.uploadFile({
-          url: that.data.serverURL+'uploadphoto.php',
-          filePath: tempFilePaths[0],
-          name: 'file',
-          formData: {
-            email: 'test@mails.tsinghua.edu.cn',
-            courseName: that.data.courseName,
-            price: that.data.price,
-            subject: that.data.subject,
-            useServer: that.data.useServer,
-          },
-          success(res) {
-            console.log("it's good!")
-            const data = res.data
-            console.log(data)
-            that.setData({
-              netTestValue: "上传成功!"
-            })
-          }
-        })
+        // that.setData({
+        //   itemPicturePath: images.length <= 3 ? images : images.slice(0, 3)
+        // });
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          wx.saveFile({
+            tempFilePath: tempFilePaths[i],
+            success(res1) {
+              const savedFilePath = res1.savedFilePath
+              that.setData({
+                itemPicturePath: that.data.itemPicturePath.concat(savedFilePath)
+              })
+              console.log('图片保存的地址')
+              console.log(that.data.itemPicturePath[i])
+            }
+          })
+        }
       }
     })
   },
@@ -219,6 +189,7 @@ Page({
     this.setData({
       itemSort: e.detail.value
     })
+    console.log(this.data.itemSort)
   },
 
   wxGetItemInfo: function (e) {
@@ -261,6 +232,13 @@ Page({
   removeImage(e) {
     const idx = e.target.dataset.idx
     var newItemPicturePath = this.data.itemPicturePath
+    wx.removeSavedFile({  //之前把图片保存到缓存中了，删除缩略图的时候需要删除对应的图
+      filePath: this.data.itemPicturePath[idx],
+      success(res) {
+        console.log('[publish.js][删除已缓存图片] success')
+        console.log(res)
+      }
+    })
     newItemPicturePath.splice(idx, 1)
     this.setData({
       itemPicturePath: newItemPicturePath
@@ -280,12 +258,79 @@ Page({
   },
 
   // Modify this function to update data to database
-  bindToastTap: function () {
+  bindPublish: function () {
+    var that = this
     console.log('发布成功')
-    this.setData({
-      // show the success icon 
-      bookToastHidden: false
+    wx.request({
+      url: that.data.serverURL + 'publish.php',
+      data: {
+        itemName: that.data.itemName,
+        itemPrice: that.data.itemPrice,
+        itemShortInfo: that.data.itemShortInfo,
+        itemSubject: that.data.itemSubject,
+        itemSortIsClass: that.data.itemSort[0],  //新增一个类型用来表示是否是课程类的物品，方便后台存储和交互
+        itemSort: that.data.itemSort[1],
+        itemInfo: that.data.itemInfo,
+        itemPublisher: that.data.itemPublisher,
+        itemPublishVersion: that.data.itemPublishVersion,
+        itemCourseName: that.data.itemCourseName,
+        itemCourseNO: that.data.itemCourseNO,
+        itemCourseTeacher: that.data.itemCourseTeacher,
+        itemUserID: app.globalData.userID
+      },
+      success: function (res) {
+        console.log('[publish.js][发布文本数据上传数据库] request success')
+        console.log(that.data)
+        console.log(res)
+        that.setData({
+          itemID: res.data['itemID']
+          
+        })
+        for (let i = 0; i < that.data.itemPicturePath.length; i++) {
+          wx.uploadFile({
+            url: that.data.serverURL + 'uploadPictures.php',
+            filePath: that.data.itemPicturePath[i],
+            name: 'file',
+            formData: {
+              itemPictureNO: that.data.itemPicturePath.length,
+              num: i + 1,
+              itemID: that.data.itemID,
+              itemUserID: app.globalData.userID,
+              useServer: that.data.useServer
+            },
+            success(res) {
+              console.log('[test.js][上传照片] success')
+              console.log(res)
+            },
+            fail() {
+              console.log('[test.js][上传照片] failed')
+            },
+            complete(){
+            }
+          })
+        }    
+      },
+      fail: function () {
+        console.log("[publish.js][发布文本数据上传数据库] fail")
+      },
+      complete: function () {
+        //console.log("[publish.js][发布文本数据上传数据库] complete")
+        for (let i = 0; i < that.data.itemPicturePath.length; i++) {
+          wx.removeSavedFile({  //之前把图片保存到缓存中了，删除缩略图的时候需要删除对应的图
+            filePath: that.data.itemPicturePath[i],
+            success(res) {
+              console.log('[publish.js][删除已缓存图片] success')
+              console.log(res)
+            }
+          })
+        }
+        that.setData({
+          itemPicturePath: [],//认为图片上传成功就算发布成功了，隐去Toast的阴影
+          bookToastHidden: false// show the success icon 
+        })
+      }
     })
+    
     //wx.reLaunch({
     //  url: '../index/index'
     //})
@@ -293,7 +338,7 @@ Page({
   hideToast: function () {
     this.setData({
       // hide the success icon
-      bookToastHidden: true
+      bookToastHidden: true,
     })
     wx.reLaunch({
       url: '../index/index'

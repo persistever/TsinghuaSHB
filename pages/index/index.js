@@ -159,7 +159,7 @@ Page({
   // 跳转至详情页
   navigateDetail: function (e) {
     wx.navigateTo({
-      url: '../detail/detail?itemID=' + e.currentTarget.dataset.itemID
+      url: '../detail/detail?itemID=' + e.currentTarget.dataset.aid
     })
   },
   // 加载更多

@@ -7,7 +7,7 @@
     "pages/profile/profile",
     "pages/detail/detail",
     "pages/search/search",
-    "pages/search/wxSearch/wxSearch"
+    "pages/test/test"
   ],
   "window": {
     "backgroundTextStyle": "dark",
@@ -34,7 +34,7 @@
         "selectedIconPath": "images/publish_icon.png"
       },
       {
-        "pagePath": "pages/message/message",
+        "pagePath": "pages/test/test",
         "text": "消息",
         "iconPath": "images/message_icon.png",
         "selectedIconPath": "images/message_icon.png"
