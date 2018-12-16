@@ -1,10 +1,13 @@
 // pages/detail/detail.js
-var app = getApp()
+var app = getApp();
 
 Page({
   data: {
     indicatorDots: true,
     autoplay: true,
+    useServer: app.globalData.useServer,
+    serverURL: app.globalData.serverURL,
+    special: '课程',
     //书籍信息
     img_url: ['../../images/programIcon.png'],
     book_id: null,
@@ -13,11 +16,11 @@ Page({
     book_sort: '书籍',
     book_info: '微积分是门好课',
     book_pub: '清华大学出版社',
-    book_cn: '高等数学',
-    book_ct: '章纪民',
+    book_pubv:'第一版',
     user_id: null,
-    useServer: app.globalData.useServer,
-    serverURL: app.globalData.serverURL,
+    isclass: '不是',
+    course_name: '高等数学',
+    course_teacher: '章纪民'
   },
   onLoad: function (e) {
     var that = this
@@ -49,10 +52,12 @@ Page({
           book_sort: res.data['itemSort'],
           book_info: res.data['itemInfo'],
           book_pub: res.data['itemPublisher'],
-          book_cn: res.data['itemPublishTime'],
-          book_ct: res.data['itemCourseTeacher'],
+          book_pubv: res.data['itemPublishVersion'],
           img_url: res.data['itemPicturePathList'],
-          user_id: res.data['itemUserID']
+          user_id: res.data['itemUserID'],
+          isclass: res.data['itemSortIsClass'],
+          course_name: res.data['itemCourseName'],
+          course_teacher: res.data['itemCourseTeacher']
         })
       },
       fail: function () {

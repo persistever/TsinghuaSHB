@@ -14,7 +14,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
 	"appid": "wx64bd3cfc861a6519",
-	"projectname": "TsinghuaSHB_Stable",
+	"projectname": "TsinghuaSHB",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},

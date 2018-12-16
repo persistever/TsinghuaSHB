@@ -1,23 +1,45 @@
-/* pages/message/message.wxss */
-@import "../search/wxSearch/wxSearch.wxss";
-
-.image-wrap {
-  width: 31%;
-  margin-right: 10rpx;
+.chat-item{
+  width: 750rpx;
+  background: #ffffff;
+  padding: 25rpx 25rpx 25rpx 0;
+  border-bottom: solid 1px #ebebeb;
+  display:flex;
+  justify-content: space-between;
+}
+.chat-item image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100rpx;
+  margin-left:20rpx;
 }
 
-.image {
-  flex: 1;
-  height: 200rpx;
-  width: 100%;
+.chat-item .chat-content{
+  width: 600rpx;
+  margin-left: 30rpx;
+}
+.chat-item .chat-content .chat-source{
+  color: #818A8F;
+  font-size: 30rpx;
+  padding: 4rpx 0 8rpx 0;
+}
+.chat-item .chat-content .chat-source .lasttime{
+  font-size: 25rpx;
+  float: right;
+  margin-right:20rpx;
+  text-align: right;
+}
+.chat-item .chat-content .chat-source .chatmate{
+  font-size: 35rpx;
+  color: #000000;
+}
+.chat-item .chat-content .chat-source .state{
+  font-size: 30rpx;
+  color:red;
 }
 
-.image-remover {
-  text-align: center;
-}
-
-.images {
-  display: flex;
-  align-items: center;
-  margin-top: 40rpx;
+.chat-item .chat-content .chat-txt{
+  display: block;
+  color: #7b7b7b;
+  font-size: 30rpx;
+  line-height: 34rpx;
 }
