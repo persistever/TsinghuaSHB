@@ -19,6 +19,7 @@ Page({
     code: null,
     inputCode: null,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    isRegistered: true,
     haveAuth: false,
     haveRegister: false,
     timer: null,
@@ -130,13 +131,10 @@ Page({
       }
     })
   },
-  bindGetUserInfo(e) {
+  bindAuthorizeButton(e) {
     var that = this
-    console.log(e.detail.userInfo)
     app.globalData.userInfo = e.detail.userInfo
-    console.log(app.globalData.userInfo)
     app.globalData.userNickName=e.detail.userInfo['nickName']
-    console.log(app.globalData.userNickName)
     wx.login({
       success: function (res1) {
         if (res1.code) {
@@ -145,17 +143,20 @@ Page({
           })
           // 发起网络请求
           wx.request({
-            url: 'https://api.weixin.qq.com/sns/jscode2session?' +
-              'appid=' + 'wx64bd3cfc861a6519' +
-              '&secret=' + '3001107d014a9aa432e0b50a2cd6c10a' +
-              '&js_code=' + res1.code +
-              '&grant_type=authorization_code',
-            method: 'POST',
+            // url: 'https://api.weixin.qq.com/sns/jscode2session?' +
+            //   'appid=' + 'wx64bd3cfc861a6519' +
+            //   '&secret=' + '3001107d014a9aa432e0b50a2cd6c10a' +
+            //   '&js_code=' + res1.code +
+            //   '&grant_type=authorization_code',
+            // method: 'POST',
+            url:that.data.serverURL+'getOpenID.php',
+            data: {
+              userCode: res1.code
+            },
             success: function (res2) {
-              console.log('[login.js][code换取session_key请求] success ')
-              console.log(res2)
+              //console.log('[login.js][code换取session_key请求] success ')
+              //console.log(res2)
               app.globalData.userOpenID = res2.data['openid']
-              console.log(app.globalData.userOpenID)
             },
             fail: function () {
               console.log('[app.js][code换取session_key请求] failed ')
@@ -170,19 +171,22 @@ Page({
                   useServer: app.globalData.useServer,
                 },
                 success: function (res3) {
-                  console.log('[login.js][查看是否已注册] success ')
-                  console.log(res3)
+                  //console.log('[login.js][查看是否已注册] success ')
+                  //console.log(res3)
                   if (res3.data['haveRegister'] == true) {
                     app.globalData.userEmail = res3.data['userEmail']
                     app.globalData.userID = res3.data['userID'];
-                    console.log('[login.js][查看是否已经有了用户所有信息]')
-                    console.log(app.globalData)
+                    //console.log('[login.js][查看是否已经有了用户所有信息]')
+                    //console.log(app.globalData)
                     wx.reLaunch({
                       url: '../index/index'
                     })
                   }
-                  //userInfo = res.
-                  //wx.setStorageSync('res', userInfo)
+                  else{  
+                    that.setData({
+                      isRegistered: false
+                    })
+                  }
                 },
                 fail: function () {
                   console.log('[app.js][查看是否已注册] failed ')
@@ -280,5 +284,4 @@ Page({
       }, 1000)
     })
   }
-
 })

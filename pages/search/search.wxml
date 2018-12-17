@@ -4,21 +4,23 @@
 
 <view class="wxSearch-section">
   <view class="wxSearch-pancel">
-    <input bindinput="wxSearchInput" bindfocus="wxSearchFocus" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="请输入关键字" />
+    <input bindinput="wxSearchInput" bindfocus="wxSearchFocus" focus="true" 
+    value="{{wxSearchData.value}}" bindblur="wxSearchBlur" 
+    class="wxSearch-input" placeholder="多个关键词请用空格隔开" />
     <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">搜索</button>
   </view>
 </view>
 <template is="wxSearch" data="{{wxSearchData}}"/>
-<view hidden="{{searchBackHidden}}" class="container">
+<view hidden="{{searchBackHidden}}" class="nav_section">
       <block wx:if="{{wxSearchBackData.length>0}}">
-          <view wx:for="{{wxSearchBackData}}" wx:key="item.id">
+          <view wx:for="{{wxSearchBackData}}" wx:key="item.itemID">
               <view class="nav_section_items" >
                   <!--image-->
-                  <view class="section_image" bindtap="navigateDetail" data-aid="{{item.id}}">
+                  <view class="section_image" bindtap="navigateDetail" data-aid="{{item.itemID}}">
                       <image src="{{item.itemCoverPath}}" mode="aspectFill"></image>
                   </view>
                   <!--content-->
-                  <view class="section_cont" bindtap="navigateDetail" data-aid="{{item.id}}">
+                  <view class="section_cont" bindtap="navigateDetail" data-aid="{{item.itemID}}">
                       <view class="section_cont_sub">
                           <text>{{item.itemName}}</text>
                       </view>
@@ -28,8 +30,10 @@
               </view>  
           </view>
         </block>
-        <block wx:if="{{wxSearchBackData.length==0 && wxSearchData}}">
-          <text>啥也没搜到~</text>
+        <block wx:if="{{wxSearchBackData.length==0 && wxSearchData}}" >
+          <view style="text-align: center;">
+            <text>啥也没搜到诶~</text>
+          </view>
         </block>
     
 </view>

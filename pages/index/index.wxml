@@ -7,7 +7,7 @@
 <view class="wxSearch-section">
   <view class="wxSearch-pancel">
     <input bindfocus="wxToSearchTap" value="{{wxSearchData.value}}" class="wxSearch-input" placeholder="搜索" bindtap="wxToSearchTap"/>
-    <button class="wxSearch-button" bindtap="wxToSearchTap" size="mini" plain="true">搜索</button>
+    <!-- <button class="wxSearch-button" bindtap="wxToSearchTap" size="mini" plain="true">搜索</button> -->
   </view>
 </view>
 
