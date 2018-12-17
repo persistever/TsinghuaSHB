@@ -1,26 +1,21 @@
-<!--index.wxml-->
+<!--search.wxml-->
 
 <import src="./wxSearch/wxSearch.wxml"/>
 
 <view class="wxSearch-section">
   <view class="wxSearch-pancel">
-    <input bindinput="wxSearchInput" bindfocus="wxSearchFocus" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="搜索" />
+    <input bindinput="wxSearchInput" bindfocus="wxSearchFocus" value="{{wxSearchData.value}}" bindblur="wxSearchBlur" class="wxSearch-input" placeholder="请输入关键字" />
     <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">搜索</button>
   </view>
 </view>
 <template is="wxSearch" data="{{wxSearchData}}"/>
 <view hidden="{{searchBackHidden}}" class="container">
-      <view wx:if="{{wxSearchData && wxSearchBackData}}">
-          <block wx:for="{{wxSearchBackData}}" wx:key="item.id">
+      <block wx:if="{{wxSearchBackData.length>0}}">
+          <view wx:for="{{wxSearchBackData}}" wx:key="item.id">
               <view class="nav_section_items" >
                   <!--image-->
                   <view class="section_image" bindtap="navigateDetail" data-aid="{{item.id}}">
-                  <block wx:if="{{item.itemPicturePath}}">
-                      <image src="{{item.itemPicturePath}}" mode="aspectFill"></image>
-                  </block>
-                  <block wx:else>
-                      <image src="../../images/default_pic.png" mode="aspectFill"></image>
-                  </block>
+                      <image src="{{item.itemCoverPath}}" mode="aspectFill"></image>
                   </view>
                   <!--content-->
                   <view class="section_cont" bindtap="navigateDetail" data-aid="{{item.id}}">
@@ -30,13 +25,11 @@
                       <view class="section_cont_price">价格：{{item.itemPrice}}</view>
                       <view>{{item.itemShortInfo}}</view>
                   </view>
-                  <!--book-->
-                  <view class="section_book" bindtap="bookTap" data-aid="{{item.id}}">
-                          <text>查看</text>
-                  </view>
-              </view>
-              
-          </block>
-    </view>
-    <view wx:else>请输入搜索关键字</view>
+              </view>  
+          </view>
+        </block>
+        <block wx:if="{{wxSearchBackData.length==0 && wxSearchData}}">
+          <text>啥也没搜到~</text>
+        </block>
+    
 </view>

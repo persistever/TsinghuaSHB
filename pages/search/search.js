@@ -1,14 +1,11 @@
-//index.js
+//search.js
 //获取应用实例
 var WxSearch = require('./wxSearch/wxSearch.js')
 var app = getApp()
 Page({
   data: {
-    // wxSearchData:{
-    //   view:{
-    //     isShow: true
-    //   }
-    // }
+    useServer: app.globalData.useServer,
+    serverURL: app.globalData.serverURL
   },
   onLoad: function () {
     console.log('onLoad')
@@ -51,34 +48,38 @@ Page({
     var that = this
     WxSearch.wxSearchHiddenPancel(that);
   },
-  
+
   // do something to jump to another page
-  bookTap: function(e){
+  bookTap: function (e) {
 
   },
 
   // Modify this function to interact with database
-  wxSearchBack: function(e) {
+  wxSearchBack: function (e) {
     // do something for searching with searchText and return an arr
-    var searchText = this.data.wxSearchData.value
+    var that = this
+    var searchText = that.data.wxSearchData.value
     console.log(searchText)
-    var arr = [
-        {
-          itemName: "火力发电厂水资源1",
-          itemPicturePath: "../../images/example.jpg",
-          itemPrice: '¥25',
-          itemShortInfo: '火力发电厂水资源教材'
-        },
-        {
-          itemName: "火力发电厂水资源2",
-          itemPicturePath: "../../images/example.jpg",
-          itemPrice: '¥25',
-          itemShortInfo: '火力发电厂水资源教材'
-        },
-      ]
-    this.setData({
-      wxSearchBackData: arr
-    });
-    
+    wx.request({
+      url: that.data.serverURL + "search.php",
+      data: {
+        useServer: that.data.useServer,
+        serverURL: that.data.serverURL,
+        searchInput: searchText,
+        searchType:0,
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          wxSearchBackData:res.data
+        })
+      },
+      fail: function () {
+        console.log("fail")
+      },
+      complete: function () {
+        // console.log("complete")
+      }
+    })
   }
 })
