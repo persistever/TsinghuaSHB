@@ -59,10 +59,6 @@
                     <view class="section_cont_price">价格：{{item.itemPrice}}</view>
                     <view>{{item.itemShortInfo}}</view>
                 </view>
-                <!--book-->
-                <view class="section_book" bindtap="bookTap" data-aid="{{item.itemID}}">
-                        <text>查看</text>
-                </view>
             </view>
             
         </block>

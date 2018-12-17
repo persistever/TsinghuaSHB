@@ -1,24 +1,37 @@
 <!--pages/collect/collect.wxml-->
-<view>
-      <scroll-view scroll-Y="true" scroll-X="false"> 
-          <view class="wuge" wx:if="{{allGoods == '' || allGoods.length == 0}}">没有收藏</view>
-          <view wx:for="{{allGoods}}" wx:key="item.id"  class="list" >
-                <view class="item" >
-                      <view class="image" bindtap="toDetail" data-id="{{item.id}}">
-                          <image src="{{item.img}}"/>
-                      </view>
-                      <view class="content">
-                          <text class="h1">{{item.name}}</text>
-                          <!--<text class="p">1个／不低于120斤</text>-->
-                          <text class="p"></text>
-                          <text class="p myp">¥{{item.price}}</text>
-                      </view>
-                      <view class="number">
-                          <view class="plus" bindtap="jian" data-id="{{item.id}}">-</view>
-                          <view class="sum">{{item.buycount}}</view>
-                          <view class="plus" bindtap="jia" data-id="{{item.id}}">+</view>
-                      </view>
-                </view>
+
+<view class="container">
+<scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
+  <!--list-->
+  <view class="nav_section">
+  <view wx:if="{{list}}">
+      <block wx:for="{{list}}" wx:key="item.itemID">
+        <view class="nav_section_items" >
+          <!--image-->
+          <view class="section_image" bindtap="navigateDetail" data-aid="{{item.itemID}}">
+            <block wx:if="{{item.itemCoverPath}}">
+              <image src="{{item.itemCoverPath}}" mode="aspectFill"></image>
+            </block>
+            <block wx:else>
+              <image src="../../images/default_pic.png" mode="aspectFill"></image>
+            </block>
           </view>
-      </scroll-view>
+          <!--content-->
+          <view class="section_cont" bindtap="navigateDetail" data-aid="{{item.itemID}}">
+            <view class="section_cont_sub">
+              <text>{{item.itemName}}</text>
+            </view>
+            <view class="section_cont_price">价格：{{item.itemPrice}}</view>
+            <view>{{item.itemShortInfo}}</view>
+          </view>
+          <!--book-->
+          <view class="section_book" bindtap="bookTap" data-aid="{{item.itemID}}">
+            <text>查看</text>
+          </view>
+        </view>
+      </block>  
+      </view>
+    <view wx:else>暂无数据</view>
+  </view>
+</scroll-view>
 </view>

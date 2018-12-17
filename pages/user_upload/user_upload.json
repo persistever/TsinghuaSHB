@@ -1,1 +1,4 @@
-{}
+{
+  "enablePullDownRefresh": false,
+  "navigationBarTitleText": "我发布的书"
+}
