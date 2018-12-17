@@ -7,7 +7,9 @@
     "pages/profile/profile",
     "pages/detail/detail",
     "pages/search/search",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/collect/collect",
+    "pages/user_upload/user_upload"
   ],
   "window": {
     "backgroundTextStyle": "dark",

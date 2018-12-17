@@ -1,2 +1,24 @@
 <!--pages/profile/profile.wxml-->
-<text>pages/profile/profile.wxml</text>
+<view class="user-head">
+    <view class="center">
+        <view class="user-img">
+            <open-data type="userAvatarUrl"></open-data>
+            <!--<image src="{{userInfo.avatarUrl}}"/>-->
+        </view>
+        <view class="user-text">
+            <open-data type="userNickName" lang="zh_CN"></open-data>
+            <!--<text class="text">{{userInfo.nickName}}</text>-->
+        </view>
+    </view>
+</view>
+
+<view class="list">
+    <view class="item" bindtap="collect">
+        <image src="../../images/collect.jpg"/>我收藏的书
+        <text class="jump">〉</text>
+    </view>
+    <view class="item" bindtap="user_upload">
+        <image src="../../images/user_upload.jpg"/>我发布的书
+        <text class="jump">〉</text>
+    </view>
+</view>
