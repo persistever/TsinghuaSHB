@@ -1,1 +1,68 @@
 /* pages/profile/profile.wxss */
+/**index.wxss**/
+
+.user-head {
+  background:#fff;
+  height:500rpx;
+  position: relative;
+  display:-webkit-flex;
+	display:flex;
+	width:100%;
+  justify-content:center;
+  align-content:center;
+}
+.user-head .center{
+    display: flex;
+    flex-flow: column;
+    padding-top: 100rpx;
+}
+.user-img{
+  width:300rpx;
+  height: 300rpx;
+}
+
+.user-img image {
+  width:240rpx;
+  height: 240rpx;
+  border-radius: 50%;
+  border:20rpx solid rgba(97, 16, 97, 0.952);
+}
+.user-text{
+  text-align:center;
+  width:100%;
+}
+.user-text text{
+  font-family: 微软雅黑;
+  color:#333;
+  display: block;
+  font-size: 40rpx;
+  margin-top: 30rpx;
+}
+
+
+.list {
+  background: #fff;
+  margin-top:50rpx;
+}
+.list .item{
+  padding:40rpx 30rpx;
+  font-size: 28rpx;
+  color:#333;
+  position: relative;
+  border-bottom: 2rpx solid #f3f3f3;
+}
+.list .item::last-child{
+  border:none;
+}
+.list .item image {
+  width:80rpx;
+  height: 80rpx;
+  display: inline-block;
+  vertical-align:middle;
+  margin-right:10rpx;
+}
+.list .item .jump{
+  position: absolute;
+  right:40rpx;
+  color:#999;
+}

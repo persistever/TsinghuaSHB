@@ -1,65 +1,32 @@
-// pages/profile/profile.js
+//profile.js
+//获取应用实例
+var app = getApp()
+var sta = require("../../utils/util.js");
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    userInfo: {},
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
   onShow: function () {
-
+    sta();
+  },
+  onLoad: function () {
+    var that = this
+    //获取用户信息，包括用户ID，用户名，用户头像，给到userInfo里面
+    app.getUserInfo(function (userInfo) {
+      that.setData({
+        userInfo: userInfo
+      });
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  user_upload: function () {
+    wx.navigateTo({ url: "../../pages/user_upload/user_upload" });
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  collect: function () {
+    //订单
+    wx.navigateTo({ url: "/pages/collect/collect" })
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
   onShareAppMessage: function () {
 
   }
