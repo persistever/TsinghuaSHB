@@ -198,6 +198,9 @@ function wxSearchDeleteKey(e, that) {
     data: value,
     success: function () {
       getHisKeys(that);
+      that.setData({
+        searchBackHidden: true
+      });
     }
   })
 }
@@ -209,7 +212,8 @@ function wxSearchDeleteAll(that) {
       var temData = that.data.wxSearchData;
       temData.his = value;
       that.setData({
-        wxSearchData: temData
+        wxSearchData: temData,
+        searchBackHidden: true
       });
     }
   })
