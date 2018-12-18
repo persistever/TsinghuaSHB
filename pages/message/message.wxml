@@ -1,17 +1,17 @@
 
 <view class="container">
   <block wx:for="{{messageList}}" wx:key="messageID">
-    <view class="chat-item">
-      <view class="image">
-        <image src="{{item.userIcon}}"></image>
-      </view>
+    <view class="chat-item" bindtap="bindIntoChat" data-theotheruserid="{{item.messageTheOtherUserID}}" data-itemid="{{item.itemID}}">
+      <!-- <view class="image"> -->
+        <!-- <image src="{{item.userIcon}}"></image> -->
+      <!-- </view> -->
       <view class="chat-content">
         <view class="chat-source">
           <text class="chatmate">{{item.userName}}</text>
-          <block wx:if="{{item.messageHaveRead==false}}">
+          <block wx:if="{{item.messageIsRead==false}}">
             <text class="state">[未读]</text>
           </block>
-          <text class="lasttime">{{item.messageTime}}</text>
+          <text class="lasttime">{{item.messageSendTime}}</text>
         </view>
         <text class="chat-txt">{{item.message}}</text>
       </view>

@@ -17,10 +17,11 @@ Page({
     book_info: '微积分是门好课',
     book_pub: '清华大学出版社',
     book_pubv:'第一版',
-    user_id: null,
+    itemUserID: null,
     isclass: '不是',
     course_name: '高等数学',
-    course_teacher: '章纪民'
+    course_teacher: '章纪民',
+    inputMessage: ''
   },
   onLoad: function (e) {
     var that = this
@@ -48,13 +49,13 @@ Page({
         console.log(res.data)
         that.setData({
           book_name: res.data['itemName'],
-          book_price: res.data['itemPrice'],
+          book_price: res.data['itemPrice']+'￥',
           book_sort: res.data['itemSort'],
           book_info: res.data['itemInfo'],
           book_pub: res.data['itemPublisher'],
           book_pubv: res.data['itemPublishVersion'],
           img_url: res.data['itemPicturePathList'],
-          user_id: res.data['itemUserID'],
+          itemUserID: res.data['itemUserID'],
           isclass: res.data['itemSortIsClass'],
           course_name: res.data['itemCourseName'],
           course_teacher: res.data['itemCourseTeacher']
@@ -66,6 +67,24 @@ Page({
       complete: function () {
         // console.log("complete")
       }
+    })
+  },
+  bindInputMessage: function(e){
+    this.setData({
+      inputMessage: e.detail.value
+    })
+  },
+  messageTap: function(){
+    var that = this
+    wx.navigateTo({
+      url: '../chat/chat?itemID='+that.data.book_id+
+        '&theOtherUserID=' + that.data.itemUserID +
+        '&itemCoverPath='+that.data.img_url[0]+
+        '&itemPrice='+that.data.book_price+
+        '&itemName='+that.data.book_name+
+        '&itemSort=' + that.data.book_sort+
+        '&inputMessage=' + that.data.inputMessage+
+        '&isComeFromDetailPage='+true,
     })
   }
 })

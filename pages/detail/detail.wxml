@@ -38,9 +38,9 @@
 </block>
 <view class="message-section">
   <view class="message-pancel">
-    <input value="{{messageData.value}}" class="message-input" placeholder="请输入留言"/>
+    <input value="{{messageData.value}}" bindinput="bindInputMessage" class="message-input" placeholder="请输入留言"/>
     <button class="message-button" bindtap="messageTap" size="mini" plain="true">留言</button>
-    <text>卖家ID：{{user_id}}</text>
+    <text>卖家ID：{{itemUserID}}</text>
   </view>
 </view>
 </scroll-view>

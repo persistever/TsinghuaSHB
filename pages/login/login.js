@@ -176,8 +176,8 @@ Page({
                   if (res3.data['haveRegister'] == true) {
                     app.globalData.userEmail = res3.data['userEmail']
                     app.globalData.userID = res3.data['userID'];
-                    //console.log('[login.js][查看是否已经有了用户所有信息]')
-                    //console.log(app.globalData)
+                    console.log('[login.js][查看是否已经有了用户所有信息]')
+                    console.log(app.globalData)
                     wx.reLaunch({
                       url: '../index/index'
                     })

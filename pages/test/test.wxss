@@ -1,23 +1,11 @@
 /* pages/message/message.wxss */
-@import "../search/wxSearch/wxSearch.wxss";
-
-.image-wrap {
-  width: 31%;
-  margin-right: 10rpx;
+.other-button-hover {
+  background-color: blue;
 }
-
-.image {
-  flex: 1;
-  height: 200rpx;
-  width: 100%;
-}
-
-.image-remover {
-  text-align: center;
-}
-
-.images {
-  display: flex;
-  align-items: center;
-  margin-top: 40rpx;
+.ar_book{
+    background:#d24a58;
+    font-size: 32rpx;
+    color:#fff;
+    border-radius: 0rpx;
+    margin:40rpx 0rpx 10rpx;
 }

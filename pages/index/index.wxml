@@ -56,7 +56,7 @@
                     <view class="section_cont_sub">
                         <text>{{item.itemName}}</text>
                     </view>
-                    <view class="section_cont_price">价格：{{item.itemPrice}}</view>
+                    <view class="section_cont_price">价格：{{item.itemPrice}}￥</view>
                     <view>{{item.itemShortInfo}}</view>
                 </view>
             </view>

@@ -1,15 +1,6 @@
 <!--pages/test/test.wxml-->
-<!-- 图片缩略图  -->
-<view class="images">
-  <block wx:for="{{itemPicturePath}}" wx:key="*this">
-    <view class="image-wrap">
-      <!-- 图片缩略图  -->
-      <image class="image" src="{{item}}" mode="aspectFill" data-idx="{{index}}" bindtap="handleImagePreview"></image>
-      <!-- 移除图片的按钮  -->
-      <view class="image-remover" data-idx="{{index}}" bindtap="removeImage">删除</view>
-    </view>
-  </block>
-</view>
+<view>this is a test for message</view>
 <view>
-  <button class="wxSearch-button" bindtap="wxToUploadPhoto" size="mid" plain="true" wx:if="{{itemPicturePath.length < 3}}">上传图片</button>
+<input placeholder="输入消息" auto-focus bindinput="getInputMessage" class="input_msg" type="text" maxlength="50"/>
+<button class="ar_book" bindtap="bindSendMessage">发送消息</button>
 </view>

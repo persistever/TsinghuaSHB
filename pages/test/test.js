@@ -10,6 +10,8 @@ Page({
     itemPicturePath: [],
     useServer: app.globalData.useServer,
     serverURL: app.globalData.serverURL,
+
+    inputMesssage: null
   },
 
   /**
@@ -68,54 +70,25 @@ Page({
 
   },
 
-  wxToUploadPhoto: function () {
-    var that = this
-    wx.chooseImage({
-      count: 3-that.data.itemPicturePath.length,
-      sizeType: ['original','compressed'],
-      sourceType: ['album','camera'],
-      success(res){
-        const tempFilePaths = res.tempFilePaths
-        // wx.saveFile({
-        //   tempFilePath: tempFilePaths[0],
-        //   success(res1) {
-        //     const savedFilePath = res1.savedFilePath
-        //     console.log(savedFilePath)
-        //   }
-        //})
-        console.log('temp'+tempFilePaths.length)
-        for (let i =0 ; i< tempFilePaths.length; i++){
-          wx.saveFile({
-            tempFilePath: tempFilePaths[i],
-            success(res1) {
-              const savedFilePath = res1.savedFilePath
-              that.setData({
-                itemPicturePath: that.data.itemPicturePath.concat(savedFilePath)
-              })
-              console.log('图片保存的地址')
-              console.log(that.data.itemPicturePath[i])
-              wx.uploadFile({
-                url: that.data.serverURL + 'uploadPictureTest.php',
-                filePath: that.data.itemPicturePath[i],
-                name: 'file',
-                formData: {
-                  useServer: that.data.useServer
-                },
-                success(res) {
-                  console.log('[test.js][上传照片] success')
-                  console.log(res)
-                },
-                fail() {
-                  console.log('[test.js][上传照片] failed')
-                }
-              })
-            }
-          })
-        }
-      }
+  getInputMessage: function(e){
+    this.setData({
+      inputMesssage: e.detail.value
     })
-    //for (newFilePath in that.data.itemPicturePath) {
-      
-    //}
+  },
+
+  bindSendMessage: function(){
+    wx.connectSocket({
+      url: 'wss://tsinghuashb.idlab-tsinghua.com',
+      data: {
+        x: '123',
+        y: '456'
+      },
+      header: {
+        'content-type': 'application/json',
+        'charset': 'utf-8'
+      },
+      //protocols: ['protocol1'],
+      //method: 'GET'
+    })
   }
 })

@@ -16,13 +16,13 @@ page {
 }
 .book_img{
   height:250rpx;
-  width:280rpx;
+  width:200rpx;
   overflow:hidden;
   display:block;
 }
 
 .right{
-  margin-left: 50rpx;
+  margin-left: 20rpx;
 }
 
 .jia_img{
