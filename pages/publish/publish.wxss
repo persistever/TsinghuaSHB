@@ -87,7 +87,7 @@
 .ar_cont{
     width:100%;
     padding:10rpx 60rpx;
-    font-size:40rpx;
+    font-size:30rpx;
     background: #fff;
     margin-bottom:40rpx;
     line-height: 45rpx;
