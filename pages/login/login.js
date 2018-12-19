@@ -154,8 +154,8 @@ Page({
               userCode: res1.code
             },
             success: function (res2) {
-              //console.log('[login.js][code换取session_key请求] success ')
-              //console.log(res2)
+              console.log('[login.js][code换取session_key请求] success ')
+              console.log(res2)
               app.globalData.userOpenID = res2.data['openid']
             },
             fail: function () {
@@ -169,10 +169,11 @@ Page({
                   userOpenID: app.globalData.userOpenID,
                   userNickName: app.globalData.userNickName,
                   useServer: app.globalData.useServer,
+                  userIconPath: app.globalData.userInfo['avatarUrl']
                 },
                 success: function (res3) {
-                  //console.log('[login.js][查看是否已注册] success ')
-                  //console.log(res3)
+                  console.log('[login.js][查看是否已注册] success ')
+                  console.log(res3)
                   if (res3.data['haveRegister'] == true) {
                     app.globalData.userEmail = res3.data['userEmail']
                     app.globalData.userID = res3.data['userID'];
@@ -219,6 +220,7 @@ Page({
           userOpenID: app.globalData.userOpenID,
           userNickName: app.globalData.userNickName,
           userEmail: app.globalData.userEmail,
+          userIconPath: app.globalData.userInfo['avatarUrl'],
           useServer: app.globalData.useServer,
         },
         success: function (res) {
