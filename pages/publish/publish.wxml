@@ -50,21 +50,21 @@
         <view class="wxSearch-section" wx:if="{{itemSortIsClass==1}}">
           <view class="wxSearch-pancel">
           <text class="publish_text">课程名</text>
-          <input bindinput="wxGetItemCourseName" class="input_msg" type="text" maxlength="100"/>
+          <input bindinput="wxGetItemCourseName" class="input_msg" cursor-spacing="140" type="text" maxlength="100"/>
           </view>
         </view>
 
         <view class="wxSearch-section" wx:if="{{itemSortIsClass==1}}">
           <view class="wxSearch-pancel">
           <text class="publish_text">课程号</text>
-          <input bindinput="wxGetItemCourseNO" class="input_msg" type="text" maxlength="50"/>
+          <input bindinput="wxGetItemCourseNO" class="input_msg" cursor-spacing="140" type="text" maxlength="50"/>
           </view>
         </view>
 
         <view class="wxSearch-section" wx:if="{{itemSortIsClass==1}}">
           <view class="wxSearch-pancel">
           <text class="publish_text">授课教师</text>
-          <input bindinput="wxGetItemCourseTeacher" class="input_msg" type="text" maxlength="50"/>
+          <input bindinput="wxGetItemCourseTeacher" class="input_msg" cursor-spacing="140" type="text" maxlength="50"/>
           </view>
         </view>
 
@@ -80,21 +80,21 @@
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
           <text class="publish_text">出版社 </text>
-          <input bindinput="wxGetItemPublisher" class="input_msg" type="text" maxlength="50" />
+          <input bindinput="wxGetItemPublisher" class="input_msg" cursor-spacing="140" type="text" maxlength="50" />
           </view>
         </view>
 
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
           <text class="publish_text">版次 </text>
-          <input bindinput="wxGetItemPublishVersion" class="input_msg" type="text" maxlength="10" />
+          <input bindinput="wxGetItemPublishVersion" class="input_msg" cursor-spacing="140" type="text" maxlength="10" />
           </view>
         </view>
         
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
           <text class="publish_text">详情 </text>
-          <textarea bindinput="wxGetItemInfo" class=".input_msg.input_detail" type="text" maxlength="200" />
+          <textarea bindinput="wxGetItemInfo" class=".input_msg.input_detail" cursor-spacing="140" type="text" maxlength="200" />
           </view>
         </view>
        
@@ -102,7 +102,7 @@
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
           <text class="publish_text">价格 </text>
-          <input bindinput="wxGetItemPrice" placeholder="不可高于1000元" class="input_msg" type="number" value="{{itemPrice}}"/>
+          <input bindinput="wxGetItemPrice" placeholder="不可高于1000元" class="input_msg" cursor-spacing="140" type="number" value="{{itemPrice}}"/>
           </view>
         </view>
 
