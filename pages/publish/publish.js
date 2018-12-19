@@ -260,76 +260,85 @@ Page({
   // Modify this function to update data to database
   bindPublish: function () {
     var that = this
-    console.log('发布成功')
-    wx.request({
-      url: that.data.serverURL + 'publish.php',
-      data: {
-        itemName: that.data.itemName,
-        itemPrice: that.data.itemPrice,
-        itemShortInfo: that.data.itemShortInfo,
-        itemSubject: that.data.itemSubject,
-        itemSortIsClass: that.data.itemSort[0],  //新增一个类型用来表示是否是课程类的物品，方便后台存储和交互
-        itemSort: that.data.itemSort[1],
-        itemInfo: that.data.itemInfo,
-        itemPublisher: that.data.itemPublisher,
-        itemPublishVersion: that.data.itemPublishVersion,
-        itemCourseName: that.data.itemCourseName,
-        itemCourseNO: that.data.itemCourseNO,
-        itemCourseTeacher: that.data.itemCourseTeacher,
-        itemUserID: app.globalData.userID
-      },
-      success: function (res) {
-        console.log('[publish.js][发布文本数据上传数据库] request success')
-        console.log(that.data)
-        console.log(res)
-        that.setData({
-          itemID: res.data['itemID']
-          
-        })
-        for (let i = 0; i < that.data.itemPicturePath.length; i++) {
-          wx.uploadFile({
-            url: that.data.serverURL + 'uploadPictures.php',
-            filePath: that.data.itemPicturePath[i],
-            name: 'file',
-            formData: {
-              itemPictureNO: that.data.itemPicturePath.length,
-              num: i + 1,
-              itemID: that.data.itemID,
-              itemUserID: app.globalData.userID,
-              useServer: that.data.useServer
-            },
-            success(res) {
-              console.log('[test.js][上传照片] success')
-              console.log(res)
-            },
-            fail() {
-              console.log('[test.js][上传照片] failed')
-            },
-            complete(){
-            }
+    if (that.data.itemPicturePath.length>0){
+      wx.request({
+        url: that.data.serverURL + 'publish.php',
+        data: {
+          itemName: that.data.itemName,
+          itemPrice: that.data.itemPrice,
+          itemShortInfo: that.data.itemShortInfo,
+          itemSubject: that.data.itemSubject,
+          itemSortIsClass: that.data.itemSort[0],  //新增一个类型用来表示是否是课程类的物品，方便后台存储和交互
+          itemSort: that.data.itemSort[1],
+          itemInfo: that.data.itemInfo,
+          itemPublisher: that.data.itemPublisher,
+          itemPublishVersion: that.data.itemPublishVersion,
+          itemCourseName: that.data.itemCourseName,
+          itemCourseNO: that.data.itemCourseNO,
+          itemCourseTeacher: that.data.itemCourseTeacher,
+          itemUserID: app.globalData.userID
+        },
+        success: function (res) {
+          console.log('[publish.js][发布文本数据上传数据库] request success')
+          console.log(that.data)
+          console.log(res)
+          that.setData({
+            itemID: res.data['itemID']
           })
-        }    
-      },
-      fail: function () {
-        console.log("[publish.js][发布文本数据上传数据库] fail")
-      },
-      complete: function () {
-        //console.log("[publish.js][发布文本数据上传数据库] complete")
-        for (let i = 0; i < that.data.itemPicturePath.length; i++) {
-          wx.removeSavedFile({  //之前把图片保存到缓存中了，删除缩略图的时候需要删除对应的图
-            filePath: that.data.itemPicturePath[i],
-            success(res) {
-              console.log('[publish.js][删除已缓存图片] success')
-              console.log(res)
-            }
+          console.log('发布成功')
+          for (let i = 0; i < that.data.itemPicturePath.length; i++) {
+            wx.uploadFile({
+              url: that.data.serverURL + 'uploadPictures.php',
+              filePath: that.data.itemPicturePath[i],
+              name: 'file',
+              formData: {
+                itemPictureNO: that.data.itemPicturePath.length,
+                num: i + 1,
+                itemID: that.data.itemID,
+                itemUserID: app.globalData.userID,
+                useServer: that.data.useServer
+              },
+              success(res) {
+                console.log('[test.js][上传照片] success')
+                console.log(res)
+              },
+              fail() {
+                console.log('[test.js][上传照片] failed')
+              },
+              complete() {
+              }
+            })
+          }
+        },
+        fail: function () {
+          console.log("[publish.js][发布文本数据上传数据库] fail")
+        },
+        complete: function () {
+          //console.log("[publish.js][发布文本数据上传数据库] complete")
+          for (let i = 0; i < that.data.itemPicturePath.length; i++) {
+            wx.removeSavedFile({  //之前把图片保存到缓存中了，删除缩略图的时候需要删除对应的图
+              filePath: that.data.itemPicturePath[i],
+              success(res) {
+                console.log('[publish.js][删除已缓存图片] success')
+                console.log(res)
+              }
+            })
+          }
+          that.setData({
+            itemPicturePath: [],//认为图片上传成功就算发布成功了，隐去Toast的阴影
+            bookToastHidden: false// show the success icon 
           })
         }
-        that.setData({
-          itemPicturePath: [],//认为图片上传成功就算发布成功了，隐去Toast的阴影
-          bookToastHidden: false// show the success icon 
-        })
-      }
-    })
+      })
+    }
+    else{
+      wx.showToast({
+        title: "请上传至少1张图片!",
+        icon: 'none',
+        duration: 2000
+      })
+    }
+    
     
     //wx.reLaunch({
     //  url: '../index/index'

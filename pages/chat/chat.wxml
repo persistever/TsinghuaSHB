@@ -23,6 +23,8 @@
   <view class='xiahuaxian1 xiahuaxia'></view>
   <view class="historycon">
     <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" class="history" wx:for="{{messageList}}" wx:key=''>
+    <!-- <scroll-view scroll-y="true" scro
+    ll-into-view="{{item.messageSendTime}}" class="history" wx:for="{{messageList}}" wx:key=''> -->
       <view>
         <text class='time'>{{item.messageSendTime}}</text> 
       </view>
@@ -57,8 +59,8 @@
 <view class='hei' id="hei"></view>
 <!--发送信息-->
 <view class="sendmessage">
-  <input bindinput="bindMessageInput" confirm-type="done" value='{{news_input_val}}' placeholder="" />
+  <input bindinput="bindMessageInput" value='{{messageInput}}' confirm-type="done" placeholder="" />
   <button bindtap="bindMessageSend">发送</button>
-  <input style='display:none' type="" bindinput="bindMessageInput" confirm-type="done" placeholder="" />
+  <!-- <input style='display:none' type="" bindinput="bindMessageInput" confirm-type="done" placeholder="" /> -->
   <image bindtap="upimg1" class='jia_img' src='/images/add.png'></image>
 </view>

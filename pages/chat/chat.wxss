@@ -146,7 +146,7 @@ page {
 .historycon {
   height: 90%;
   width: 100%;
-  flex-direction: column;
+  flex-direction: column-reverse;
   display: flex;
   margin-top: 100rpx;
   border-top: 0px;
@@ -162,4 +162,5 @@ page {
   font-size: 28rpx;
   line-height: 80rpx;
   word-break: break-all;
+  overflow: visible
 }

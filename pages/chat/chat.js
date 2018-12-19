@@ -158,10 +158,11 @@ Page({
           console.log('[chat.js][查看messsageList：message是否写入存储]')
           console.log(wx.getStorageSync(that.data.messageName))
           that.setData({
-            messageList: messageListTemp
+            messageList: messageListTemp,
+            messageInput: ''
           }) 
           console.log(data)
-          console.log(that.data.messageList)    
+          console.log(that.data.messageList)
         },
         fail: function(){
         },
@@ -208,9 +209,6 @@ Page({
             messageListTemp.push(res.data[i]);
           }
 
-          
-
-
           wx.setStorageSync(that.data.messageName, messageListTemp)
           console.log('[chat.js][查看messsageList：message返回值是否写入存储]')
           console.log(wx.getStorageSync(that.data.messageName))
@@ -227,6 +225,9 @@ Page({
       }
     })
 
+  },
+  bindScroll: function(e){
+    console.log(e);
   }
 })
 
