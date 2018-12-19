@@ -39,7 +39,7 @@
   </view>
   <!--list-->
   <view class="nav_section">
-    <view wx:if="{{list[curIndex]}}">
+    <view wx:if="{{list[curIndex].length!=0}}">
         <block wx:for="{{list[curIndex]}}" wx:key="item.itemID">
             <view class="nav_section_items" >
                 <!--image-->
