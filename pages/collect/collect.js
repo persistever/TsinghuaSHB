@@ -11,12 +11,6 @@ Page({
   },
   onLoad: function () {
     var that = this
-    // navSectionItems 为/utils/data.js中设置的默认数据，
-    // 在有远程服务的时候，应当注释掉
-    // that.setData({
-    //   list: that.data.navSectionItems
-    // })
-
     /*------------------------------
      * wx.request()
      * 说明：请求Page:collect的userID的收藏

@@ -1,5 +1,7 @@
 /* pages/collect/collect.wxss */
 
+@import "../search/wxSearch/wxSearch.wxss";
+
 /* 导航对应内容项 */
 .nav_section{
     width:100%;

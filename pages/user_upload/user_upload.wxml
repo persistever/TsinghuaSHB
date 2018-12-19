@@ -1,8 +1,10 @@
+<import src="../search/search.wxml"/>
+
 <view class="container">
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
   <!--list-->
   <view class="nav_section">
-  <view wx:if="{{list}}">
+    <view wx:if="{{list}}">
       <block wx:for="{{list}}" wx:key="item.itemID">
         <view class="nav_section_items" >
           <!--image-->
@@ -28,8 +30,8 @@
           </view>
         </view>
       </block>  
-      </view>
-    <view wx:else>暂无数据</view>
+    </view>
+    <view wx:else>亲，赶快去发布吧~</view>
   </view>
 </scroll-view>
 </view>

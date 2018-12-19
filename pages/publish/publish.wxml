@@ -9,42 +9,73 @@
           </view>
         </view>
 
-        <view class="wxSearch-section">
-          <view class="wxSearch-pancel">
-          <text class="publish_text">价格(不可高于1000元) </text>
-          <input bindinput="wxGetItemPrice" class="input_msg" type="digit" value="{{itemPrice}}"/>
-          </view>
-        </view>
+
+
+        <!-- <view class="wxSearch-section"> -->
+          <!-- <view class="wxSearch-pancel"> -->
+          <!-- <text class="publish_text">简介 </text> -->
+          <!-- <input bindinput="wxGetItemShortInfo" class="input_msg" type="text" maxlength="100" /> -->
+          <!-- </view> -->
+        <!-- </view> -->
+
 
         <view class="wxSearch-section">
-          <view class="wxSearch-pancel">
-          <text class="publish_text">简介 </text>
-          <input bindinput="wxGetItemShortInfo" class="input_msg" type="text" maxlength="100" />
-          </view>
+          <picker bindchange="wxGetItemSortIsClass"  value="{{itemSortIsClass}}" range="{{itemSortIsClassList}}">
+          <!-- <text class="publish_text">是否课程 </text> -->
+          <view class="tui-picker-detail">{{itemSortIsClassList[itemSortIsClass]}}</view>
+          </picker>
         </view>
 
-        <view class="wxSearch-section">
+        <view wx:if="{{itemSortIsClass==1}}" class="wxSearch-section">
           <picker bindchange="wxGetItemSubject"  value="{{itemSubject}}" range="{{itemSubjectList}}">
-          <text class="publish_text">主题 </text>
+          <!-- <text class="publish_text">主题 </text> -->
           <view class="tui-picker-detail">{{itemSubjectList[itemSubject]}}</view>
           </picker>
         </view>
 
-        <view class="wxSearch-section">
+        <view wx:if="{{itemSortIsClass==0}}" class="wxSearch-section">
+          <picker bindchange="wxGetItemSort"  value="{{itemSort}}" range="{{itemSortList0}}">
+          <!-- <text class="publish_text">类别 </text> -->
+          <view class="tui-picker-detail">{{itemSortList0[itemSort]}}</view>
+          </picker>
+        </view>
+
+        <view wx:if="{{itemSortIsClass==1}}" class="wxSearch-section">
+          <picker bindchange="wxGetItemSort"  value="{{itemSort}}" range="{{itemSortList1}}">
+          <!-- <text class="publish_text">类别 </text> -->
+          <view class="tui-picker-detail">{{itemSortList1[itemSort]}}</view>
+          </picker>
+        </view>
+
+        <view class="wxSearch-section" wx:if="{{itemSortIsClass==1}}">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">课程名</text>
+          <input bindinput="wxGetItemCourseName" class="input_msg" type="text" maxlength="100"/>
+          </view>
+        </view>
+
+        <view class="wxSearch-section" wx:if="{{itemSortIsClass==1}}">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">课程号</text>
+          <input bindinput="wxGetItemCourseNO" class="input_msg" type="text" maxlength="50"/>
+          </view>
+        </view>
+
+        <view class="wxSearch-section" wx:if="{{itemSortIsClass==1}}">
+          <view class="wxSearch-pancel">
+          <text class="publish_text">授课教师</text>
+          <input bindinput="wxGetItemCourseTeacher" class="input_msg" type="text" maxlength="50"/>
+          </view>
+        </view>
+
+        <!-- <view class="wxSearch-section">
           <picker mode="multiSelector" bindchange="wxGetItemSort" bindcolumnchange="wxGetItemSortColumnChange" value="{                       {itemSort}}" range="{{itemSortArray}}">
             <view class="publish_text">类型</view>
             <view class="tui-picker-detail">
             {{itemSortArray[0][itemSort[0]]}}，{{itemSortArray[1][itemSort[1]]}}
             </view>
           </picker>
-        </view>
-
-        <view class="wxSearch-section">
-          <view class="wxSearch-pancel">
-          <text class="publish_text">详情 </text>
-          <input bindinput="wxGetItemInfo" class="input_msg" type="text" maxlength="200" />
-          </view>
-        </view>
+        </view> -->
 
         <view class="wxSearch-section">
           <view class="wxSearch-pancel">
@@ -59,25 +90,19 @@
           <input bindinput="wxGetItemPublishVersion" class="input_msg" type="text" maxlength="10" />
           </view>
         </view>
-
-        <view class="wxSearch-section" wx:if="{{[itemSort[0]]==0}}">
+        
+        <view class="wxSearch-section">
           <view class="wxSearch-pancel">
-          <text class="publish_text">课程名</text>
-          <input bindinput="wxGetItemCourseName" class="input_msg" type="text" maxlength="100"/>
+          <text class="publish_text">详情 </text>
+          <textarea bindinput="wxGetItemInfo" class=".input_msg.input_detail" type="text" maxlength="200" />
           </view>
         </view>
+       
 
-        <view class="wxSearch-section" wx:if="{{[itemSort[0]]==0}}">
+        <view class="wxSearch-section">
           <view class="wxSearch-pancel">
-          <text class="publish_text">课程号</text>
-          <input bindinput="wxGetItemCourseNO" class="input_msg" type="text" maxlength="50"/>
-          </view>
-        </view>
-
-        <view class="wxSearch-section" wx:if="{{[itemSort[0]]==0}}">
-          <view class="wxSearch-pancel">
-          <text class="publish_text">授课教师</text>
-          <input bindinput="wxGetItemCourseTeacher" class="input_msg" type="text" maxlength="50"/>
+          <text class="publish_text">价格 </text>
+          <input bindinput="wxGetItemPrice" placeholder="不可高于1000元" class="input_msg" type="number" value="{{itemPrice}}"/>
           </view>
         </view>
 

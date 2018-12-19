@@ -2,7 +2,9 @@
  * banner数据
  */ 
 function getBannerData(){
-    var arr = ['../../images/banner_1.jpg', '../../images/banner_2.jpg', '../../images/banner_3.jpg', '../../images/banner_4.jpg']
+  var arr = ['../../images/banner_1.jpg', '../../images/banner_2.jpg', '../../images/banner_3.jpg', '../../images/banner_4.jpg']
+  //var arr = ['https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJUcmfzbuXU0k4QKjPLXfnQ2OS6AC2MaN34anTSVKpWticbroEu9tQr3Q8icAVu3F4mjEIXx5PZBQDw/132', '../../images/banner_2.jpg', '../../images/banner_3.jpg', '../../images/banner_4.jpg']
+  
     return arr
 }
 /*

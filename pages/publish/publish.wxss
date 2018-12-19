@@ -85,8 +85,9 @@
     margin:20rpx auto;
 }
 .ar_cont{
-    padding:20rpx 60rpx;
-    font-size:30rpx;
+    width:100%;
+    padding:10rpx 60rpx;
+    font-size:40rpx;
     background: #fff;
     margin-bottom:40rpx;
     line-height: 45rpx;
@@ -129,9 +130,18 @@
     margin-left:10rpx;
 }
 .input_msg{
-    border:1px solid #ddd; 
+    width: 75%;
+    height: 70rpx;
+    border:2px solid #ddd; 
     border-radius:8rpx;
     padding:0rpx 10rpx;
+    margin-left: auto;  /*自动对齐*/
+    word-wrap: break-word;
+}
+.input_msg.input_detail{
+    height: 150rpx;
+    overflow: scroll;
+
 }
 .ar_book{
     background:#d24a58;

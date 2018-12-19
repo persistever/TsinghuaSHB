@@ -7,16 +7,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    netTestValue: "后台访问失败",
+    netTestValue: "网络连接异常，无法发布",
     itemID: null,
     itemCourseName: "",
     itemName: "",
     itemPrice: "",
     itemShortInfo: "",
     itemSubjectList: ["理科", "工科", "文科", "其它"],
+    itemSortIsClass: 1,
+    itemSortIsClassList: ["非课程","课程"],
     itemSubject: 0,
-    itemSortArray: [["课程资料", "非课程资料"], ["课本","讲义","作业","参考书","其他"]],
-    itemSort: [0, 0],
+    itemSortList0: ["科技", "艺术", "人文社科", "经济金融", "其他"],
+    itemSortList1: ["课本", "讲义", "作业", "参考书", "其他"],
+    itemSort: 0,
     itemInfo: "",
     itemPublisher: "",
     itemPublishVersion: "",
@@ -50,7 +53,7 @@ Page({
     wx.request({
       url: that.data.serverURL + 'data.php',
       data: {
-        netTestValue: '后台访问失败',
+        netTestValue: '网络连接异常，无法发布',
       },
       success: function (res) {
         // console.log("success")
@@ -157,33 +160,40 @@ Page({
       });
   },
 
-  // process the column change (课程资料/非课程资料)
-  wxGetItemSortColumnChange: function (e) {
-    var data = {
-      itemSortArray: this.data.itemSortArray,
-      itemSort: this.data.itemSort
-    };
-    data.itemSort[e.detail.column] = e.detail.value;
-    switch (e.detail.column) {
-      case 0:
-        switch (data.itemSort[0]) {
-          // dynamically change the second column when the first column change
-          case 0:
-            //课程资料
-            data.itemSortArray[1] = ["课本", "讲义", "作业", "参考书", "其他"];
-            break;
-          case 1:
-            //非课程资料
-            data.itemSortArray[1] = ["科技", "艺术", "人文社科", "经济金融", "其他"];
-            break;
-        }
-        data.itemSort[1] = 0;
-        break;
-      case 1:
-        break;
-    }
-    this.setData(data);
+  wxGetItemSortIsClass(e){
+    this.setData({
+      itemSortIsClass: e.detail.value
+    });
   },
+
+  // process the column change (课程资料/非课程资料)
+  // wxGetItemSortColumnChange: function (e) {
+  //   var data = {
+  //     itemSortArray: this.data.itemSortArray,
+  //     itemSort: this.data.itemSort
+  //   };
+  //   data.itemSort[e.detail.column] = e.detail.value;
+  //   switch (e.detail.column) {
+  //     case 0:
+  //       switch (data.itemSort[0]) {
+  //         // dynamically change the second column when the first column change
+  //         case 0:
+  //           //课程资料
+  //           data.itemSortArray[1] = ["课本", "讲义", "作业", "参考书", "其他"];
+  //           break;
+  //         case 1:
+  //           //非课程资料
+  //           data.itemSortArray[1] = ["科技", "艺术", "人文社科", "经济金融", "其他"];
+  //           break;
+  //       }
+  //       data.itemSort[1] = 0;
+  //       break;
+  //     case 1:
+  //       break;
+  //   }
+  //   this.setData(data);
+  // },
+
 
   wxGetItemSort: function (e) {
     this.setData({
@@ -268,8 +278,8 @@ Page({
           itemPrice: that.data.itemPrice,
           itemShortInfo: that.data.itemShortInfo,
           itemSubject: that.data.itemSubject,
-          itemSortIsClass: that.data.itemSort[0],  //新增一个类型用来表示是否是课程类的物品，方便后台存储和交互
-          itemSort: that.data.itemSort[1],
+          itemSortIsClass: that.data.itemSortIsClass,  //新增一个类型用来表示是否是课程类的物品，方便后台存储和交互
+          itemSort: that.data.itemSort,
           itemInfo: that.data.itemInfo,
           itemPublisher: that.data.itemPublisher,
           itemPublishVersion: that.data.itemPublishVersion,
