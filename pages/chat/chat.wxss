@@ -5,24 +5,34 @@ page {
 }
 
 .tab {
-  padding: 20rpx 20rpx 40rpx 50rpx;
-  height: 15%;
-  background-color: white;
+  /* padding: 20rpx 20rpx 40rpx 50rpx; */
+  padding: 20rpx;
+  height: 270rpx;
+  background-color: purple;
 }
 
 .flex{
   display:flex;
+  flex-direction: row;
 }
 
 .book_img{
-  height:14%;
+  height:250rpx;
   width:200rpx;
-  overflow:hidden;
-  display:block;
+  /* overflow:hidden; */
+  /* display:block; */
+}
+
+.book_info{
+  font-size: 30rpx;
+  color: white;
 }
 
 .right{
+  height: 270rpx;
   margin-left: 20rpx;
+  margin-top: 20rpx;
+  overflow: scroll;
 }
 
 .jia_img{
@@ -46,13 +56,13 @@ page {
 
 .chatbody {
   display: flex;
-
+  padding-top: 5rpx;
 }
 
 .time {
   text-align: center;
   padding: 5rpx 20rpx 5rpx 20rpx;
-  font-size: 32rpx;
+  font-size: 20rpx;
   background-color: #E8E8E8;
 }
 

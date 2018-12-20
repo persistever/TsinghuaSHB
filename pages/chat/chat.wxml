@@ -1,16 +1,17 @@
 <!--pages/index/to_news/to_news.wxml-->
 <!--上半部分加入书籍图片和信息以及接口的view-->
 
-<view class='tab'>
+<view class='tab' bindtap="ToBook">
   <view class='flex'>
   <view>
-    <image bindtap="ToBook" class='book_img' src='{{itemCoverPath}}' mode="aspectFit"></image>
+    <image class='book_img' src='{{itemCoverPath}}' mode="aspectFit"></image>
   </view>
   <view class = 'right'>
-    <view><text class='book_name'>资料名：{{itemName}}</text></view>
-    <view><text class='book_price'>价格：{{itemPrice}}</text></view>
-    <view><text class='book_price'>类型：{{itemSort}}</text></view>
-    <view><text class='book_status'>{{bookstatus}}</text></view>
+    <view><text class='book_info'>资料名：{{itemName}}</text></view>
+    <view><text class='book_info'>价格：{{itemPrice}}</text></view>
+    <view><text class='book_info'>简介：{{itemShortInfo}}</text></view>
+    <!-- <view><text class='book_status'>{{bookstatus}}</text></view> 目前后台还没有这个接口，等一下-->
+    <view><text class='book_info'>在售</text></view>
   </view>
   </view>
 </view>

@@ -64,7 +64,7 @@
         </block>
     </view>
     
-    <view wx:else>暂无数据</view>
+    <view wx:else style="text-align: center">暂无数据~</view>
 
 </view>
 

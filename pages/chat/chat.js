@@ -31,11 +31,10 @@ Page({
     itemCoverPath: null,
     itemName: null,
     itemPrice: null,
-    itemSort: null,
     isComeFromDetailPage: false,
     messageInput: '',
     messageList: [],
-    updateMessageNO: 0,
+    updateMessageNO: 0,  //显示未读信息条数的功能还没有实现，这个变量暂时没用
     messageName: null,
     theOtherUserID: null,
 
@@ -56,25 +55,42 @@ Page({
     // 再通过setData更改Page()里面的data，动态更新页面的数据
     var that = this
     this.setData({
-      userID: app.globalData.userID,
       date_time: time,
+      userID: app.globalData.userID,
       itemID: e.itemID,
-      //itemName: e.itemName,
-      //itemPrice: e.itemPrice,
-      //itemCoverPath: e.itemCoverPath,
-      //itemSort: e.itemSort,
       isComeFromDetailPage: e.isComeFromDetailPage,
       messageInput: e.messageInput,
       theOtherUserID: e.theOtherUserID,
       messageName: 'msg_' + e.itemID + '_' + e.theOtherUserID,
-
-
     })
     console.log('[chat.js][查看是否被正确赋值]')
     console.log(that.data)
 
     //messageName的取值在这里有Bug
-
+    wx.request({
+      url: that.data.serverURL + "detail.php",
+      data: {
+        useServer: that.data.useServer,
+        serverURL: that.data.serverURL,
+        itemID: that.data.itemID,
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          itemName: res.data['itemName'],
+          itemPrice: '￥' + res.data['itemPrice'],
+          itemShortInfo: res.data['itemShortInfo'],
+          itemCoverPath: res.data['itemPicturePathList'][0],
+          itemUserID: res.data['itemUserID'],
+        })
+      },
+      fail: function () {
+        console.log("fail")
+      },
+      complete: function () {
+        // console.log("complete")
+      }
+    })
     if (wx.getStorageInfoSync().keys.indexOf(that.data.messageName) == -1) {
       let messageNameTemp = 'msg_' + that.data.itemID + '_' + that.data.theOtherUserID
       console.log(messageNameTemp)
@@ -120,9 +136,9 @@ Page({
     var that = this
     console.log(that.data.isComeFromDetailPage)
     if (!that.data.isComeFromDetailPage) {
-      // wx.navigateTo({
-      //   url: '/pages/detail/detail?itemID=' + that.data.itemID
-      // })
+      wx.navigateTo({
+        url: '/pages/detail/detail?itemID=' + that.data.itemID
+      })
     }
   },
 
