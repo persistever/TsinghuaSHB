@@ -6,6 +6,7 @@ App({
     userNickName: null,
     userEmail: null,
     userID: null,
+    //userID: 12,
     //后端协同开发前端时使用，前端开发勿做任何修改-------
     useServer: 1,
     serverURL: 'https://tsinghuashb.idlab-tsinghua.com/TsinghuaSHB/',
@@ -20,7 +21,7 @@ App({
     //var logs = wx.getStorageSync('logs')
     //logs.unshift(Date.now())
     //wx.setStorageSync('logs', logs)
-    //wx.clearStorageSync()
+    wx.clearStorageSync()
 
     var storageInfo = wx.getStorageInfoSync()
     if(storageInfo.keys.indexOf('messageNameList')==-1){

@@ -22,7 +22,6 @@
       <view>
         <text class='time'>{{item.messageSendTime}}</text> 
       </view>
-      <view>test</view>
       <block wx:if="{{item.messageSendUserID ==userID}}">
         <view class='my_right'>
           <!-- <text wx:if='{{!item.is_img}}' class='new_txt'>"{{item.messageInput}}"</text> -->

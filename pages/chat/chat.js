@@ -1,4 +1,4 @@
-﻿// pages/index/to_news/to_news.js
+// pages/index/to_news/to_news.js
 //reference:
 //https://blog.csdn.net/qq_35713752/article/details/78688311
 var app = getApp()
@@ -14,7 +14,6 @@ Page({
   data: {
     pageheight: 0,
     chatheight: 0,
-    scrolltop:10000,
 
     news: '',
     message: '',
@@ -44,7 +43,7 @@ Page({
     tiemSecond: 1000,
 
     useServer: app.globalData.useServer,
-    serverURL: app.globalData.serverURL
+    serverURL: app.globalData.serverURL,
   },
 
   bindChange: function (e) {
@@ -67,7 +66,8 @@ Page({
       isComeFromDetailPage: e.isComeFromDetailPage,
       messageInput: e.messageInput,
       theOtherUserID: e.theOtherUserID,
-      messageName: 'msg_' + e.itemID + '_' + e.theOtherUserID
+      messageName: 'msg_' + e.itemID + '_' + e.theOtherUserID,
+
 
     })
     console.log('[chat.js][查看是否被正确赋值]')
@@ -144,7 +144,8 @@ Page({
           messageReceiveUserID: that.data.theOtherUserID,
           messageSendUserID: app.globalData.userID,
           messageInput: that.data.messageInput,
-          useServer: that.data.useServer
+          useServer: that.data.useServer,
+          messageName: that.data.messageName
         },
         success: function (res) {
           console.log('[chat.js][发送消息到服务器] success Time: ')
@@ -155,7 +156,7 @@ Page({
             messageReceiveUserID: that.data.theOtherUserID,
             messageSendUserID: app.globalData.userID,
             messageInput: that.data.messageInput,
-            messageSendTime: res.data['messageSendTime']
+            messageSendTime: res.data['messageSendTime'],
           }
           messageListTemp.push(data);
           wx.setStorageSync(that.data.messageName, messageListTemp)
@@ -163,10 +164,9 @@ Page({
           console.log(wx.getStorageSync(that.data.messageName))
           that.setData({
             messageList: messageListTemp,
-            messageInput: ''
+            messageInput: '',
           })
           console.log(data)
-          console.log(that.data.messageList)
         },
         fail: function () {
         },
@@ -217,7 +217,7 @@ Page({
           console.log('[chat.js][查看messsageList：message返回值是否写入存储]')
           console.log(wx.getStorageSync(that.data.messageName))
           that.setData({
-            messageList: messageListTemp
+            messageList: messageListTemp,
           })
           console.log(that.data.messageList)
         }
@@ -230,9 +230,6 @@ Page({
     })
 
   },
-  bindScroll: function (e) {
-    console.log(e);
-  }
 })
 
 

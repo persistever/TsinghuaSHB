@@ -38,11 +38,15 @@ page {
 }
 .chatshow {
   color:aliceblue;
+  display: flex;
+  flex-direction: column-reverse;
+  height: 90%;
+  width: 100%;
 }
 
 .chatbody {
   display: flex;
-  flex-direction: column;
+
 }
 
 .time {

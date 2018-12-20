@@ -13,26 +13,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    wx.request({
-      url: app.globalData.serverURL + 'checkAllMessage.php',
-      data: {
-        messageUserID: app.globalData.userID,
-        serverURL: app.globalData.serverURL
-      },
-      success: function (res) {
-        console.log('[message.js][从服务器接收消息] success Time: ')
-        console.log(res)
-        that.setData({
-          messageList: res.data
-        })
-      },
-      fail: function () {
-      },
-      complete: function () {
-      }
-    })
-
   },
 
   /**
