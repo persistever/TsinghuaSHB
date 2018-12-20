@@ -2,7 +2,7 @@
   <view wx:else>
   <view class="container">
     <block wx:for="{{messageList}}" wx:key="messageID">
-      <view class="chat-item" bindtap="bindIntoChat" data-theotheruserid="{{item.messageTheOtherUserID}}" data-itemid="{{item.itemID}}">
+      <view class="chat-item" bindtap="bindIntoChat" bindlongpress="chatdel" data-theotheruserid="{{item.messageTheOtherUserID}}" data-itemid="{{item.itemID}}">
         <view class="image">
           <image src="{{item.userIconPath}}"></image>
         </view>
