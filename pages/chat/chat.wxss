@@ -1,0 +1,107 @@
+/* pages/index/to_news/to_news.wxss */
+ 
+page {
+  background-color: #f7f7f7;
+}
+
+.tab {
+  padding: 20rpx 20rpx 40rpx 50rpx;
+  height: 15%;
+  background-color: white;
+}
+
+.flex{
+  display:flex;
+}
+
+.book_img{
+  height:14%;
+  width:200rpx;
+  overflow:hidden;
+  display:block;
+}
+
+.right{
+  margin-left: 20rpx;
+}
+
+.jia_img{
+  height: 80rpx;
+  width: 90rpx;
+}
+ 
+/* 聊天内容 */
+.chatview{
+  text-align: center;
+  margin-top:100rpx;
+  margin-bottom: 150rpx;
+}
+.chatshow {
+  color:aliceblue;
+}
+
+.chatbody {
+  display: flex;
+  flex-direction: column;
+}
+
+.time {
+  text-align: center;
+  padding: 5rpx 20rpx 5rpx 20rpx;
+  font-size: 32rpx;
+  background-color: #E8E8E8;
+}
+
+.my_right {
+  float: right;
+  position: relative;
+  right: 40rpx;
+}
+ 
+.you_left {
+  float: left;
+  position: relative;
+  left: 5rpx;
+}
+ 
+.new_img {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+ 
+.new_txt {
+  width: 380rpx;
+  border-radius: 14rpx;
+  background-color: #95d4ff;
+  padding: 0rpx 30rpx 0rpx 30rpx;
+}
+ 
+.sendmessage {
+  background-color: white;
+  width: 100%;
+  position: fixed;
+  bottom: 0rpx;
+  display: flex;
+  flex-direction: row;
+}
+ 
+.sendmessage input {
+  width: 80%;
+  height: 80rpx;
+  background-color: white;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  border: 2rpx solid #d0d0d0;
+  padding-left: 20rpx;
+}
+ 
+.sendmessage button {
+  border: 2rpx solid white;
+  width: 18%;
+  height: 80rpx;
+  background: #fff;
+  color: #000;
+  line-height: 80rpx;
+  font-size: 28rpx;
+}
