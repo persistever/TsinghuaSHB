@@ -12,6 +12,9 @@ Page({
     list: []
   },
   onLoad: function () {
+   
+  },
+  onShow: function(){
     var that = this
 
     /*------------------------------
@@ -36,7 +39,7 @@ Page({
         userID: app.globalData.userID
       },
       success: function (res) {
-        console.log(res.data)
+        //console.log(res.data)
         // console.log(res.statusCode)
         that.setData({
           list: res.data

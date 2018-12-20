@@ -22,7 +22,6 @@ Page({
     isclass: '不是',
     course_name: '高等数学',
     course_teacher: '章纪民',
-    inputMessage: ''
   },
   onLoad: function (e) {
     var that = this
@@ -117,8 +116,7 @@ Page({
         '&itemPrice='+that.data.book_price+
         '&itemName='+that.data.book_name+
         '&itemSort=' + that.data.book_sort+
-        '&inputMessage=' + that.data.inputMessage+
-        '&isComeFromDetailPage='+true,
+        '&isComeFromDetailPage='+1,
     })
   },
   onShareAppMessage: function () {

@@ -88,7 +88,7 @@ Page({
     wx.navigateTo({
       url: '../chat/chat?itemID=' + e.currentTarget.dataset.itemid +
         '&theOtherUserID=' + e.currentTarget.dataset.theotheruserid +
-        '&isComeFromDetailPage=' + false,
+        '&isComeFromDetailPage=' + 0,
     })
   },
 

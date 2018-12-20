@@ -35,7 +35,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      itemPicturePath: []
+    })
   },
 
   /**
@@ -116,9 +118,6 @@ Page({
       sourceType: ['album', 'camera'],
       success(res) {
         const tempFilePaths = res.tempFilePaths
-        // that.setData({
-        //   itemPicturePath: images.length <= 3 ? images : images.slice(0, 3)
-        // });
         for (let i = 0; i < tempFilePaths.length; i++) {
           wx.saveFile({
             tempFilePath: tempFilePaths[i],
@@ -127,8 +126,8 @@ Page({
               that.setData({
                 itemPicturePath: that.data.itemPicturePath.concat(savedFilePath)
               })
-              console.log('图片保存的地址')
-              console.log(that.data.itemPicturePath[i])
+              //console.log('图片保存的地址')
+              //console.log(that.data.itemPicturePath[i])
             }
           })
         }
@@ -166,40 +165,10 @@ Page({
     });
   },
 
-  // process the column change (课程资料/非课程资料)
-  // wxGetItemSortColumnChange: function (e) {
-  //   var data = {
-  //     itemSortArray: this.data.itemSortArray,
-  //     itemSort: this.data.itemSort
-  //   };
-  //   data.itemSort[e.detail.column] = e.detail.value;
-  //   switch (e.detail.column) {
-  //     case 0:
-  //       switch (data.itemSort[0]) {
-  //         // dynamically change the second column when the first column change
-  //         case 0:
-  //           //课程资料
-  //           data.itemSortArray[1] = ["课本", "讲义", "作业", "参考书", "其他"];
-  //           break;
-  //         case 1:
-  //           //非课程资料
-  //           data.itemSortArray[1] = ["科技", "艺术", "人文社科", "经济金融", "其他"];
-  //           break;
-  //       }
-  //       data.itemSort[1] = 0;
-  //       break;
-  //     case 1:
-  //       break;
-  //   }
-  //   this.setData(data);
-  // },
-
-
   wxGetItemSort: function (e) {
     this.setData({
       itemSort: e.detail.value
     })
-    console.log(this.data.itemSort)
   },
 
   wxGetItemInfo: function (e) {
@@ -245,8 +214,8 @@ Page({
     wx.removeSavedFile({  //之前把图片保存到缓存中了，删除缩略图的时候需要删除对应的图
       filePath: this.data.itemPicturePath[idx],
       success(res) {
-        console.log('[publish.js][删除已缓存图片] success')
-        console.log(res)
+        //console.log('[publish.js][删除已缓存图片] success')
+        //console.log(res)
       }
     })
     newItemPicturePath.splice(idx, 1)
@@ -260,7 +229,6 @@ Page({
     //delete this function if cannot return
     const idx = e.target.dataset.idx
     const images = this.data.itemPicturePath
-    console.log(images)
     wx.previewImage({
       current: images[idx],  //当前预览的图片
       urls: images,  //所有要预览的图片
@@ -289,13 +257,12 @@ Page({
           itemUserID: app.globalData.userID
         },
         success: function (res) {
-          console.log('[publish.js][发布文本数据上传数据库] request success')
-          console.log(that.data)
-          console.log(res)
+          //console.log('[publish.js][发布文本数据上传数据库] request success')
+          //console.log(that.data)
+          //console.log(res)
           that.setData({
             itemID: res.data['itemID']
           })
-          console.log('发布成功')
           for (let i = 0; i < that.data.itemPicturePath.length; i++) {
             wx.uploadFile({
               url: that.data.serverURL + 'uploadPictures.php',
@@ -309,13 +276,21 @@ Page({
                 useServer: that.data.useServer
               },
               success(res) {
-                console.log('[test.js][上传照片] success')
-                console.log(res)
+                //console.log('[test.js][上传照片] success')
+                //console.log(res)
+                //console.log('发布成功')
               },
               fail() {
                 console.log('[test.js][上传照片] failed')
               },
               complete() {
+                wx.removeSavedFile({  //之前把图片保存到缓存中了，删除缩略图的时候需要删除对应的图
+                  filePath: that.data.itemPicturePath[i],
+                  success(res) {
+                    //console.log('[publish.js][删除已缓存图片] success')
+                    //console.log(res)
+                  }
+                })
               }
             })
           }
@@ -325,17 +300,7 @@ Page({
         },
         complete: function () {
           //console.log("[publish.js][发布文本数据上传数据库] complete")
-          for (let i = 0; i < that.data.itemPicturePath.length; i++) {
-            wx.removeSavedFile({  //之前把图片保存到缓存中了，删除缩略图的时候需要删除对应的图
-              filePath: that.data.itemPicturePath[i],
-              success(res) {
-                console.log('[publish.js][删除已缓存图片] success')
-                console.log(res)
-              }
-            })
-          }
           that.setData({
-            itemPicturePath: [],//认为图片上传成功就算发布成功了，隐去Toast的阴影
             bookToastHidden: false// show the success icon 
           })
         }

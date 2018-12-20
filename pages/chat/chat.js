@@ -58,15 +58,13 @@ Page({
       date_time: time,
       userID: app.globalData.userID,
       itemID: e.itemID,
-      isComeFromDetailPage: e.isComeFromDetailPage,
-      messageInput: e.messageInput,
+      isComeFromDetailPage: parseInt(e.isComeFromDetailPage),
       theOtherUserID: e.theOtherUserID,
       messageName: 'msg_' + e.itemID + '_' + e.theOtherUserID,
     })
     //console.log('[chat.js][查看是否被正确赋值]')
     //console.log(that.data)
 
-    //messageName的取值在这里有Bug
     wx.request({
       url: that.data.serverURL + "detail.php",
       data: {

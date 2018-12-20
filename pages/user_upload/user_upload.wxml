@@ -6,9 +6,9 @@
   <view class="nav_section">
     <view wx:if="{{list}}">
       <block wx:for="{{list}}" wx:key="item.itemID">
-        <view class="nav_section_items" >
+        <view class="nav_section_items" bindtap="navigateDetail" data-aid="{{item.itemID}}">
           <!--image-->
-          <view class="section_image" bindtap="navigateDetail" data-aid="{{item.itemID}}">
+          <view class="section_image" data-aid="{{item.itemID}}">
             <block wx:if="{{item.itemCoverPath}}">
               <image src="{{item.itemCoverPath}}" mode="aspectFill"></image>
             </block>
@@ -17,7 +17,7 @@
             </block>
           </view>
           <!--content-->
-          <view class="section_cont" bindtap="navigateDetail" data-aid="{{item.itemID}}">
+          <view class="section_cont">
             <view class="section_cont_sub">
               <text>{{item.itemName}}</text>
             </view>
