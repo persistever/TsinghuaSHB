@@ -34,8 +34,8 @@ Page({
         serverURL: app.globalData.serverURL
       },
       success: function (res) {
-        console.log('[message.js][从服务器接收消息] success Time: ')
-        console.log(res)
+        //console.log('[message.js][从服务器接收消息] success Time: ')
+        //console.log(res)
         that.setData({
           messageList: res.data
         })

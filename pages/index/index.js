@@ -32,43 +32,44 @@ Page({
     //   list: that.data.navSectionItems
     // })
 
+    
+  },
+  onShow: function(){
+    var that = this
     /*------------------------------
-     * wx.request()
-     * 说明：请求Page:index的推荐、理科、工科、文科、其他类别数据
-     * url: serverURL+index.php
-     * data:{
-     * useServer: bool变量，传给后台表示采用服务器还是本地资源，前端开发无需修改。
-     * totalIndex: int 当前为5，表示有“推荐、理科、工科、文科、其他”五个类别
-     * }
-     * 请求返回值：res，该变量在successs: function中有效，需要在本页面.data中声明变量接收。
-     * res.data: 返回的三维数组，第一维5个元素，分别表示推荐、理科、工科、文科、其他；
-     * 第二维的元素取决于要求显示的条目数，目前前后台均没有设置；
-     * 第三维的元素为每一条item的详情，其key按照index.wxml中{{item.xxx}}设置，尚未规范协议。
-     * 其他说明：请求发生之后，服务器会进行响应，无论success还是fail都会执行complete
-     -------------------------------*/
+         * wx.request()
+         * 说明：请求Page:index的推荐、理科、工科、文科、其他类别数据
+         * url: serverURL+index.php
+         * data:{
+         * useServer: bool变量，传给后台表示采用服务器还是本地资源，前端开发无需修改。
+         * totalIndex: int 当前为5，表示有“推荐、理科、工科、文科、其他”五个类别
+         * }
+         * 请求返回值：res，该变量在successs: function中有效，需要在本页面.data中声明变量接收。
+         * res.data: 返回的三维数组，第一维5个元素，分别表示推荐、理科、工科、文科、其他；
+         * 第二维的元素取决于要求显示的条目数，目前前后台均没有设置；
+         * 第三维的元素为每一条item的详情，其key按照index.wxml中{{item.xxx}}设置，尚未规范协议。
+         * 其他说明：请求发生之后，服务器会进行响应，无论success还是fail都会执行complete
+         -------------------------------*/
     wx.request({
-      url: that.data.serverURL + "index.php",  
+      url: that.data.serverURL + "index.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
         totalIndex: that.data.totalIndex,
       },
       success: function (res) {
-        console.log(res.data)
-        // console.log(res.statusCode)
         that.setData({
           list: res.data
         })
       },
       fail: function () {
-        console.log("fail")
+        console.log('[index.js][onShow数据请求]  fail');
       },
       complete: function () {
         // console.log("complete")
       }
     })
   },
-
   // 下拉刷新
   onPullDownRefresh: function () {
     // 显示顶部刷新图标
@@ -82,9 +83,6 @@ Page({
         totalIndex: that.data.totalIndex,
       },
       success: function (res) {
-        // console.log("success")
-        console.log(res.data)
-        // console.log(res.statusCode)
         that.setData({
           list: res.data
         })
@@ -94,7 +92,7 @@ Page({
         wx.stopPullDownRefresh();
       },
       fail: function () {
-        console.log("fail")
+        console.log('fail')
       },
       complete: function () {
         // console.log("complete")
@@ -132,7 +130,6 @@ Page({
             }
           }
         }
-        console.log(data_list)
         // 设置数据
         that.setData({
           list: data_list

@@ -8,13 +8,19 @@ Page({
   data: {
     useServer: app.globalData.useServer,
     serverURL: app.globalData.serverURL,
+    list: []
   },
   onLoad: function () {
+    
+  },
+  // 下拉刷新
+
+  onShow: function(){
     var that = this
     /*------------------------------
      * wx.request()
      * 说明：请求Page:collect的userID的收藏
-     * url: serverURL+collect.php
+     * url: serverURL+usercollect.php
      * data:{
      * useServer: bool变量，传给后台表示采用服务器还是本地资源，前端开发无需修改。
      * totalIndex: int 当前为5，表示有“推荐、理科、工科、文科、其他”五个类别
@@ -26,14 +32,14 @@ Page({
      * 其他说明：请求发生之后，服务器会进行响应，无论success还是fail都会执行complete
      -------------------------------*/
     wx.request({
-      url: that.data.serverURL + "collect.php",
+      url: that.data.serverURL + "usercollect.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
+        userID: app.globalData.userID
       },
       success: function (res) {
         console.log(res.data)
-        // console.log(res.statusCode)
         that.setData({
           list: res.data
         })
@@ -46,16 +52,16 @@ Page({
       }
     })
   },
-  // 下拉刷新
   onPullDownRefresh: function () {
     // 显示顶部刷新图标
     wx.showNavigationBarLoading();
     var that = this;
     wx.request({
-      url: that.data.serverURL + "collect.php",
+      url: that.data.serverURL + "usercollect.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
+        userID: app.globalData.userID
       },
       success: function (res) {
         // console.log("success")
@@ -87,10 +93,11 @@ Page({
     // 页数+1
     // page = page + 1;
     wx.request({
-      url: that.data.serverURL + "collect.php",
+      url: that.data.serverURL + "usercollect.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
+        userID: app.globalData.userID
       },
       success: function (res) {
         // 回调函数

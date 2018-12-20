@@ -94,7 +94,7 @@ function wxSearchFocus(e, that, callBack) {
     wxSearchData: temData,
     searchBackHidden:true
   });
-  console.log(that.data.searchBackHidden)
+  //console.log(that.data.searchBackHidden)
   //回调
   if (typeof (callBack) == "function") {
     callBack();
