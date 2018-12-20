@@ -19,6 +19,5 @@ Page({
     wx.navigateTo({ url: "/pages/collect/collect" })
   },
   onShareAppMessage: function () {
-
   }
 })

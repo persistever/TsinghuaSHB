@@ -1,6 +1,6 @@
 <!--pages/detail/detail.wxml-->
 
-<view class="container">
+<view class="book">
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
   <!--banner-->
   <view class="swiper">
@@ -12,36 +12,36 @@
       </block>
     </swiper>
   </view>
-<view>{{book_name}}</view>
+<view class="name">{{book_name}}</view>
 <view>
   <text>报价:{{book_price}}</text>
 </view>
-<view>
+<view class="pub">
   <text decode="emsp">出版信息：{{book_pub}}&emsp;{{book_pubv}}</text>
 </view>
-<view>
-  <button class="save-button" bindtap="saveTap" size="mini" plain="true">收藏</button>
-  <button class="share-button" bindtap="shareTap" size="mini" plain="true">分享</button>
+
+<view class="button-section">
+  <block wx:if="{{book_islike}}">
+    <button class="save" bindtap="change" size="mini">已收藏</button>
+  </block>
+  <block wx:else>
+    <button class="nosave" bindtap="change" size="mini">收藏</button>
+  </block>
+  <button class="message" bindtap="messageTap" size="mini">联系卖家</button>
 </view>
-<view>书籍信息</view>
-<view>{{book_info}}</view>
+
+<view class="info">书籍信息:{{book_info}}</view>
 <block wx:if="{{isclass==special}}">
-  <view>
+  <view class="course">
     <text>本书籍为课程书籍</text>
   </view>
-  <view>
+  <view class="course">
     <text>课程:{{course_name}}</text>
   </view>
-  <view>
+  <view class="course">
     <text>授课老师:{{course_teacher}}</text>
   </view>
 </block>
-<view class="message-section">
-  <view class="message-pancel">
-    <input value="{{messageData.value}}" bindinput="bindInputMessage" class="message-input" placeholder="请输入留言"/>
-    <button class="message-button" bindtap="messageTap" size="mini" plain="true">留言</button>
-    <text>卖家ID：{{itemUserID}}</text>
-  </view>
-</view>
+
 </scroll-view>
 </view>

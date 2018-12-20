@@ -26,8 +26,8 @@
 }
 .wxSearch-button{
   flex: 1;
-  border: none !important;
-  color: cornflowerblue !important;
+  border:none;
+  color: cornflowerblue;
 }
 
 .wxSearchTitle{

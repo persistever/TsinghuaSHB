@@ -1,14 +1,63 @@
 /* 轮播图 */
 .swiper{
-    width:100%;
-    margin:0rpx;
+  width:100%;
+  margin:0rpx;
 }
 .swiper image{
-    display: inline;
+  display: inline;
+}
+.book{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 40rpx;
+}
+.name{
+  font-size: 50rpx;
+  margin-top: 20rpx;
+  border-bottom: solid 2px #ebebeb;
 }
 
-.message-input{
+.price{
+  margin-top: 20rpx;
+  font-size: 45rpx;
+}
+.pub{
+  margin-top: 5rpx;
+  border-bottom: solid 2px #ebebeb;
+}
+.info{
+  margin-top: 30rpx;
+  border-bottom: solid 2px #ebebeb;
+}
+
+.save{
+  margin-top: 20rpx;
+  border-radius: 30rpx;
+    background-color:gray;
+}
+
+.nosave{
+  margin-top: 20rpx;
+  border-radius: 30rpx;
   border: 1rpx solid gray;
-  border-radius: 15rpx;
-  margin-right: 200rpx;
+  background-color: white;
+
+}
+
+.course{
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.button-section{
+  margin-top:10rpx;
+  display: flex;
+  flex-direction: row;
+}
+.message{
+  margin-top: 20rpx;
+  border-radius: 30rpx;
+  border: 1rpx solid gray;
+  background-color: white;
 }

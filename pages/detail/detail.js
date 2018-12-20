@@ -13,6 +13,7 @@ Page({
     book_id: null,
     book_name: '微积分',
     book_price: 10,
+    book_islike:false,
     book_sort: '书籍',
     book_info: '微积分是门好课',
     book_pub: '清华大学出版社',
@@ -48,8 +49,9 @@ Page({
       success: function (res) {
         console.log(res.data)
         that.setData({
+          book_islike: res.data['itemIsLike'],
           book_name: res.data['itemName'],
-          book_price: res.data['itemPrice']+'￥',
+          book_price: '￥'+res.data['itemPrice'],
           book_sort: res.data['itemSort'],
           book_info: res.data['itemInfo'],
           book_pub: res.data['itemPublisher'],
@@ -69,11 +71,28 @@ Page({
       }
     })
   },
+
+  change: function (e){
+    var state = e.book_islike
+    console.log(state)
+    if(state){
+      this.setData({
+        bool_islike: false
+      })
+    }
+    else{
+      this.setData({
+        bool_islike: true
+      })
+    }
+  },
+
   bindInputMessage: function(e){
     this.setData({
       inputMessage: e.detail.value
     })
   },
+
   messageTap: function(){
     var that = this
     wx.navigateTo({
@@ -86,5 +105,7 @@ Page({
         '&inputMessage=' + that.data.inputMessage+
         '&isComeFromDetailPage='+true,
     })
+  },
+  onShareAppMessage: function () {
   }
 })
