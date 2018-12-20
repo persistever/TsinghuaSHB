@@ -15,7 +15,7 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "清华二手书交易平台",
+    "navigationBarTitleText": "清华二手书信息平台",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
