@@ -30,11 +30,10 @@ Page({
         serverURL: app.globalData.serverURL
       },
       success: function (res) {
-        //console.log('[message.js][从服务器接收消息] success Time: ')
-        //console.log(res)
         that.setData({
           messageList: res.data
         })
+        console.log(that.data.messageList)
       },
       fail: function () {
       },
@@ -92,6 +91,7 @@ Page({
     var _userid = e.currentTarget.dataset.theotheruserid
     var _itemid = e.currentTarget.dataset.itemid
     var that = this
+    console.log(this.data.messageList)
     wx.showModal({
       title: '删除',
       content: '是否删除该聊天',
@@ -105,7 +105,7 @@ Page({
         else {
           var index = 0
           var temp = that.data.messageList
-          console.log(that.data.messageList)
+          
           var len = temp.length
           for(var i=0;i<len;i++){
             if ((temp[i].itemid == _itemid) && (temp[i].messageTheOtherUserID ==_userid)){

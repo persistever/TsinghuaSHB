@@ -20,15 +20,17 @@
   <text decode="emsp">出版信息：{{book_pub}}&emsp;{{book_pubv}}</text>
 </view>
 
-<view class="button-section">
-  <block wx:if="{{book_islike}}">
-    <button class="save" bindtap="change" size="mini">已收藏</button>
-  </block>
-  <block wx:else>
-    <button class="nosave" bindtap="change" size="mini">收藏</button>
-  </block>
-  <button class="message" bindtap="messageTap" size="mini">联系卖家</button>
-</view>
+<block wx:if="{{!isseller}}">
+  <view class="button-section">
+    <block wx:if="{{book_islike}}">
+      <button class="save" bindtap="change" size="mini">已收藏</button>
+    </block>
+    <block wx:else>
+      <button class="nosave" bindtap="change" size="mini">收藏</button>
+    </block>
+    <button class="message" bindtap="messageTap" size="mini">联系卖家</button>
+  </view>
+</block>
 
 <view class="info">书籍信息:{{book_info}}</view>
 <block wx:if="{{isclass==special}}">

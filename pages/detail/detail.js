@@ -19,6 +19,7 @@ Page({
     book_pub: '清华大学出版社',
     book_pubv:'第一版',
     itemUserID: null,
+    isseller:false,
     isclass: '不是',
     course_name: '高等数学',
     course_teacher: '章纪民',
@@ -66,6 +67,11 @@ Page({
           course_name: res.data['itemCourseName'],
           course_teacher: res.data['itemCourseTeacher']
         })
+        if (that.data.itemUserID == app.globalData.userID){
+          that.setData({
+            isseller:true
+          })
+        }
       },
       fail: function () {
         console.log('[detail.js][onShow数据请求] fail');
