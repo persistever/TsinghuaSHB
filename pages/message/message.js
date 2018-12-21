@@ -33,7 +33,6 @@ Page({
         that.setData({
           messageList: res.data
         })
-        console.log(that.data.messageList)
       },
       fail: function () {
       },
@@ -74,7 +73,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
   },
 
   bindIntoChat: function(e){
@@ -90,11 +88,11 @@ Page({
   chatdel: function(e){
     var _userid = e.currentTarget.dataset.theotheruserid
     var _itemid = e.currentTarget.dataset.itemid
+    var del = false
     var that = this
-    console.log(this.data.messageList)
     wx.showModal({
-      title: '删除',
-      content: '是否删除该聊天',
+      title: '是否删除该聊天',
+      content: '',
       showCancel: true,
       cancelColor: 'skyblue',
       confirmColor: 'skyblue',
@@ -103,20 +101,36 @@ Page({
           //点击取消,默认隐藏弹框
         } 
         else {
-          var index = 0
-          var temp = that.data.messageList
-          
-          var len = temp.length
-          for(var i=0;i<len;i++){
-            if ((temp[i].itemid == _itemid) && (temp[i].messageTheOtherUserID ==_userid)){
-              index = i
-              break
+          var oldlist = that.data.messageList         
+          var len = oldlist.length
+          var newlist = []
+          del = true
+          for(let i=0;i<len;i++){
+            var temp = oldlist.shift()
+            if ((temp['itemID'] == _itemid) && (temp['messageTheOtherUserID'] ==_userid)){
+              continue
+            }
+            else{
+              newlist.push(temp)
             }
           }
-          that.setData({
-            messageList:temp.splice(index,1)
+          wx.request({
+            url: app.globalData.serverURL + 'deleteMessage.php',
+            data: {
+              delete_itemid: _itemid,
+              delete_userid: _userid
+            },
+            success: function (res) {
+              console.log(res)
+            },
+            fail: function () {
+            },
+            complete: function () {
+            }
+        }),
+        that.setData({
+            messageList: newlist
           })
-          console.log(index)
         }
       },
       fail: function (res) { },
