@@ -22,36 +22,40 @@ Page({
     isclass: '不是',
     course_name: '高等数学',
     course_teacher: '章纪民',
-    inputMessage: ''
   },
   onLoad: function (e) {
     var that = this
-    console.log(e.itemID)
     that.setData({
       book_id: e.itemID
     })
+  },
+
+  onShow: function(){
+    var that = this
     /*------------------------------
-     * wx.request()
-     * 说明：请求Page:detail的书籍详情数据
-     * url: serverURL+detail.php
-     * data:{
-     * useServer: bool变量，传给后台表示采用服务器还是本地资源，前端开发无需修改。
-     * }
-     * 请求返回值：res，该变量在successs: function中有效，需要在本页面.data中声明变量接收。
-     -------------------------------*/
+         * wx.request()
+         * 说明：请求Page:detail的书籍详情数据
+         * url: serverURL+detail.php
+         * data:{
+         * useServer: bool变量，传给后台表示采用服务器还是本地资源，前端开发无需修改。
+         * }
+         * 请求返回值：res，该变量在successs: function中有效，需要在本页面.data中声明变量接收。
+         -------------------------------*/
     wx.request({
       url: that.data.serverURL + "detail.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
         itemID: that.data.book_id,
+        userID: app.globalData.userID
       },
       success: function (res) {
-        console.log(res.data)
+        //console.log('[detail.js][这是onShow方法] success');
+        //console.log(res.data)
         that.setData({
           book_islike: res.data['itemIsLike'],
           book_name: res.data['itemName'],
-          book_price: '￥'+res.data['itemPrice'],
+          book_price: '￥' + res.data['itemPrice'],
           book_sort: res.data['itemSort'],
           book_info: res.data['itemInfo'],
           book_pub: res.data['itemPublisher'],
@@ -64,27 +68,37 @@ Page({
         })
       },
       fail: function () {
-        console.log("fail")
+        console.log('[detail.js][onShow数据请求] fail');
       },
       complete: function () {
         // console.log("complete")
       }
     })
+    
   },
-
   change: function (e){
-    var state = e.book_islike
-    console.log(state)
-    if(state){
-      this.setData({
-        bool_islike: false
-      })
-    }
-    else{
-      this.setData({
-        bool_islike: true
-      })
-    }
+    var that = this
+    wx.request({
+      url: that.data.serverURL + "like.php",
+      data: {
+        useServer: that.data.useServer,
+        serverURL: that.data.serverURL,
+        itemID: that.data.book_id,
+        userID: app.globalData.userID,
+        itemIsLike: that.data.book_islike,
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          book_islike: res.data['itemIsLike'],
+        })
+      },
+      fail: function () {
+        console.log("fail")
+      },
+      complete: function () {
+      }
+    })
   },
 
   bindInputMessage: function(e){
@@ -102,8 +116,7 @@ Page({
         '&itemPrice='+that.data.book_price+
         '&itemName='+that.data.book_name+
         '&itemSort=' + that.data.book_sort+
-        '&inputMessage=' + that.data.inputMessage+
-        '&isComeFromDetailPage='+true,
+        '&isComeFromDetailPage='+1,
     })
   },
   onShareAppMessage: function () {

@@ -30,7 +30,7 @@ App({
     else{
       that.globalData.messageNameList=wx.getStorageSync('messageNameList')
     }
-    console.log('[app.js][查看messageNameList是否写入存储]')
-    console.log(wx.getStorageInfoSync().keys)
+    //console.log('[app.js][查看messageNameList是否写入存储]')
+    //console.log(wx.getStorageInfoSync().keys)
   },
 })

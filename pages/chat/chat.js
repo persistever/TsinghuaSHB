@@ -58,15 +58,13 @@ Page({
       date_time: time,
       userID: app.globalData.userID,
       itemID: e.itemID,
-      isComeFromDetailPage: e.isComeFromDetailPage,
-      messageInput: e.messageInput,
+      isComeFromDetailPage: parseInt(e.isComeFromDetailPage),
       theOtherUserID: e.theOtherUserID,
       messageName: 'msg_' + e.itemID + '_' + e.theOtherUserID,
     })
-    console.log('[chat.js][查看是否被正确赋值]')
-    console.log(that.data)
+    //console.log('[chat.js][查看是否被正确赋值]')
+    //console.log(that.data)
 
-    //messageName的取值在这里有Bug
     wx.request({
       url: that.data.serverURL + "detail.php",
       data: {
@@ -75,7 +73,7 @@ Page({
         itemID: that.data.itemID,
       },
       success: function (res) {
-        console.log(res.data)
+        //console.log(res.data)
         that.setData({
           itemName: res.data['itemName'],
           itemPrice: '￥' + res.data['itemPrice'],
@@ -85,7 +83,7 @@ Page({
         })
       },
       fail: function () {
-        console.log("fail")
+        console.log('[chat.js][onLoad请求数据]  fail')
       },
       complete: function () {
         // console.log("complete")
@@ -93,7 +91,7 @@ Page({
     })
     if (wx.getStorageInfoSync().keys.indexOf(that.data.messageName) == -1) {
       let messageNameTemp = 'msg_' + that.data.itemID + '_' + that.data.theOtherUserID
-      console.log(messageNameTemp)
+      //console.log(messageNameTemp)
       this.setData({
         messageName: messageNameTemp
       })
@@ -102,8 +100,8 @@ Page({
       messageNameList.unshift(messageNameTemp)
       wx.setStorageSync('messageNameList', messageNameList)
       messageNameList = wx.getStorageSync('messageNameList')
-      console.log('[chat.js][看messageName是否加入到messsageNameList当中]')
-      console.log(messageNameList)
+      //console.log('[chat.js][看messageName是否加入到messsageNameList当中]')
+      //console.log(messageNameList)
       that.setData({
         timer: setInterval(that.checkMessage, that.data.tiemSecond)
       })
@@ -116,8 +114,8 @@ Page({
         timer: setInterval(that.checkMessage, that.data.tiemSecond)
       })
     }
-    console.log('[chat.js][查看messsageList的Name：messageName是否写入存储]')
-    console.log(wx.getStorageInfoSync().keys)
+    //console.log('[chat.js][查看messsageList的Name：messageName是否写入存储]')
+    //console.log(wx.getStorageInfoSync().keys)
   },
 
   onHide: function () {
@@ -134,7 +132,7 @@ Page({
   },
   ToBook: function () {
     var that = this
-    console.log(that.data.isComeFromDetailPage)
+    //console.log(that.data.isComeFromDetailPage)
     if (!that.data.isComeFromDetailPage) {
       wx.navigateTo({
         url: '/pages/detail/detail?itemID=' + that.data.itemID
@@ -151,7 +149,7 @@ Page({
   bindMessageSend() {
     var that = this
     var messageInput = util.trim(that.data.messageInput)
-    console.log('[chat.js][打印输入的字符串]  ' + messageInput)
+    //console.log('[chat.js][打印输入的字符串]  ' + messageInput)
     if (messageInput.length != 0) {
       wx.request({
         url: that.data.serverURL + 'sendMessage.php',
@@ -164,8 +162,8 @@ Page({
           messageName: that.data.messageName
         },
         success: function (res) {
-          console.log('[chat.js][发送消息到服务器] success Time: ')
-          console.log(res);
+          //console.log('[chat.js][发送消息到服务器] success Time: ')
+          //console.log(res);
           var messageListTemp = wx.getStorageSync(that.data.messageName)
           var data = {
             itemID: that.data.itemID,
@@ -176,13 +174,12 @@ Page({
           }
           messageListTemp.push(data);
           wx.setStorageSync(that.data.messageName, messageListTemp)
-          console.log('[chat.js][查看messsageList：message是否写入存储]')
-          console.log(wx.getStorageSync(that.data.messageName))
+          //console.log('[chat.js][查看messsageList：message是否写入存储]')
+          //console.log(wx.getStorageSync(that.data.messageName))
           that.setData({
             messageList: messageListTemp,
             messageInput: '',
           })
-          console.log(data)
         },
         fail: function () {
         },
@@ -203,12 +200,12 @@ Page({
         useServer: that.data.useServer
       },
       success: function (res) {
-        console.log('[chat.js][从服务器接收消息] success Time: ')
-        console.log(res)
+        //console.log('[chat.js][从服务器接收消息] success Time: ')
+        //console.log(res)
         if (res.data.length) {
           if (wx.getStorageInfoSync().keys.indexOf(that.data.messageName) == -1) {
             let messageNameTemp = 'msg_' + that.data.itemID + '_' + that.data.theOtherUserID
-            console.log(messageNameTemp)
+            //console.log(messageNameTemp)
             this.setData({
               messageName: messageNameTemp
             })
@@ -217,8 +214,8 @@ Page({
             messageNameList.unshift(messageNameTemp)
             wx.setStorageSync('messageNameList', messageNameList)
             messageNameList = wx.getStorageSync('messageNameList')
-            console.log('[chat.js][看messageName是否加入到messsageNameList当中12]')
-            console.log(messageNameList)
+            //console.log('[chat.js][看messageName是否加入到messsageNameList当中12]')
+            //console.log(messageNameList)
             that.setData({
               timer: setInterval(that.checkMessage, that.data.tiemSecond)
             })
@@ -230,12 +227,12 @@ Page({
           }
 
           wx.setStorageSync(that.data.messageName, messageListTemp)
-          console.log('[chat.js][查看messsageList：message返回值是否写入存储]')
-          console.log(wx.getStorageSync(that.data.messageName))
+          //console.log('[chat.js][查看messsageList：message返回值是否写入存储]')
+          //console.log(wx.getStorageSync(that.data.messageName))
           that.setData({
             messageList: messageListTemp,
           })
-          console.log(that.data.messageList)
+          //console.log(that.data.messageList)
         }
 
       },

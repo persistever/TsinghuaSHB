@@ -24,7 +24,7 @@ Page({
         useServer: that.data.useServer,
       },
       success: function (res) {
-        console.log(res.data)
+        //console.log(res.data)
         that.setData({
           searchHotKeyList: res.data
         })
@@ -85,7 +85,7 @@ Page({
     // do something for searching with searchText and return an arr
     var that = this
     var searchText = that.data.wxSearchData.value
-    console.log(searchText)
+    //console.log(searchText)
     wx.request({
       url: that.data.serverURL + "search.php",
       data: {
@@ -95,7 +95,7 @@ Page({
         searchType: 0,
       },
       success: function (res) {
-        console.log(res.data)
+        //console.log(res.data)
         that.setData({
           wxSearchBackData:res.data
         })
