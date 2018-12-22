@@ -6,7 +6,7 @@
   <view class="nav_section">
     <view wx:if="{{list}}">
       <block wx:for="{{list}}" wx:key="item.itemID">
-        <view class="nav_section_items" bindtap="navigateDetail" data-aid="{{item.itemID}}">
+        <view class="nav_section_items" bindtap="navigateDetail" bindlongpress="uploaddel" data-aid="{{item.itemID}}"  data-sold="{{item.itemIsSold}}"  data-publish="{{item.itemIsPublished}}" >
           <!--image-->
           <view class="section_image" data-aid="{{item.itemID}}">
             <block wx:if="{{item.itemCoverPath}}">
@@ -18,14 +18,20 @@
           </view>
           <!--content-->
           <view class="section_cont">
-            <view class="section_cont_sub">
+            <view wx:if="{{item.itemIsSold == 1}}" class="section_cont_sub">
+              <text>{{item.itemName}}(已售出)</text>
+            </view>
+            <view wx:if="{{item.itemIsPublished == 0}}" class="section_cont_sub">
+              <text>{{item.itemName}}（暂时不对外出售）</text>
+            </view>
+            <view wx:if="{{item.itemIsPublished == 1 && item.itemIsSold == 0}}" class="section_cont_sub">
               <text>{{item.itemName}}</text>
             </view>
             <view class="section_cont_price">价格：{{item.itemPrice}}</view>
             <view>{{item.itemShortInfo}}</view>
           </view>
           <!--book-->
-          <view class="section_book" bindtap="bookTap" data-aid="{{item.itemID}}">
+          <view class="section_book" bindtap="navigateDetail" data-aid="{{item.itemID}}">
             <text>查看</text>
           </view>
         </view>

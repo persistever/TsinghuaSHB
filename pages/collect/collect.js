@@ -30,6 +30,8 @@ Page({
      * 第一维的元素取决于要求显示的条目数，目前前后台均没有设置；
      * 第二维的元素为每一条item的详情，其key按照index.wxml中{{item.xxx}}设置，尚未规范协议。
      * 其他说明：请求发生之后，服务器会进行响应，无论success还是fail都会执行complete
+     * 
+     * 还有deleteCollect.php，传给后台itemID和userID
      -------------------------------*/
     wx.request({
       url: that.data.serverURL + "usercollect.php",
@@ -140,4 +142,58 @@ Page({
       list: that.data.navSectionItems,
     })
   },
+
+  //删除收藏
+  collectdel: function (e) {
+    var _userid = app.globalData.userID
+    var _itemid = e.currentTarget.dataset.aid
+    var del = false
+    var that = this
+    wx.showModal({
+      title: '是否删除该收藏书目',
+      content: '',
+      showCancel: true,
+      cancelColor: 'skyblue',
+      confirmColor: 'skyblue',
+      success: function (res) {
+        if (res.cancel) {
+          //点击取消,默认隐藏弹框
+        }
+        else {
+          var oldlist = that.data.list
+          var len = oldlist.length
+          var newlist = []
+          del = true
+          for (let i = 0; i < len; i++) {
+            var temp = oldlist.shift()
+            if ((temp['itemID'] == _itemid)) {
+              continue
+            }
+            else {
+              newlist.push(temp)
+            }
+          }
+          wx.request({
+            url: app.globalData.serverURL + 'deleteCollect.php',
+            data: {
+              delete_itemid: _itemid,
+              delete_userid: _userid
+            },
+            success: function (res) {
+              console.log(res)
+            },
+            fail: function () {
+            },
+            complete: function () {
+            }
+          }),
+            that.setData({
+              list: newlist
+            })
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  }
 })

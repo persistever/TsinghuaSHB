@@ -140,4 +140,119 @@ Page({
       list: that.data.navSectionItems,
     })
   },
+
+  uploaddel: function (e) {
+    var _userid = app.globalData.userID
+    var _itemid = e.currentTarget.dataset.aid
+    var _itemsold = e.currentTarget.dataset.sold
+    var _itempublished = e.currentTarget.dataset.publish
+    var _statuschangetype
+    var del = false
+    var that = this
+    if (_itemsold == 0 && _itempublished == 1) {
+      _statuschangetype = 0
+      wx.showActionSheet({
+        //三个list分别对应itemIsSold，itemIsDelete和itemIsPublished
+        itemList: ['这本书已经卖出去啦！', '这本书我不想卖了。。。', '你等我考虑考虑要不要卖'],
+        //itemColor: 'skyblue',
+        success: function (res) {
+          if (res.cancel) {
+            //点击取消,默认隐藏弹框
+          }
+          else {
+            var oldlist = that.data.list
+            var len = oldlist.length
+            var newlist = []
+            del = true
+            for (let i = 0; i < len; i++) {
+              var temp = oldlist.shift()
+              if ((temp['itemID'] == _itemid) && (res.tapIndex == 1)) {
+                continue
+              }
+              else if ((temp['itemID'] == _itemid) && (res.tapIndex == 0)) {
+                temp.itemIsSold = 1;
+                newlist.push(temp)
+              }
+              else if ((temp['itemID'] == _itemid) && (res.tapIndex == 2)) {
+                temp.itemIsPublished = 0;
+                newlist.push(temp)
+              }
+              else {
+                newlist.push(temp)
+              }
+            }
+            wx.request({
+              url: app.globalData.serverURL + 'deleteUserUpload.php',
+              data: {
+                delete_itemid: _itemid,
+                delete_userid: _userid,
+                status: _statuschangetype
+              },
+              success: function (res) {
+                console.log(res)
+              },
+              fail: function () {
+              },
+              complete: function () {
+              }
+            }),
+              that.setData({
+                list: newlist
+              })
+          }
+        },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
+    else if (_itempublished == 0){
+      _statuschangetype = 1
+      wx.showActionSheet({
+        //三个list分别对应itemIsSold，itemIsDelete和itemIsPublished
+        itemList: ['我决定了！我还是卖它'],
+        //itemColor: 'skyblue',
+        success: function (res) {
+          if (res.cancel) {
+            //点击取消,默认隐藏弹框
+          }
+          else {
+            var oldlist = that.data.list
+            var len = oldlist.length
+            var newlist = []
+            del = true
+            for (let i = 0; i < len; i++) {
+              var temp = oldlist.shift()
+              if ((temp['itemID'] == _itemid) && (res.tapIndex == 0)) {
+                temp.itemIsPublished = 1;
+                newlist.push(temp)
+              }
+              else {
+                newlist.push(temp)
+              }
+            }
+            wx.request({
+              url: app.globalData.serverURL + 'deleteUserUpload.php',
+              data: {
+                delete_itemid: _itemid,
+                delete_userid: _userid,
+                _statuschangetype
+              },
+              success: function (res) {
+                console.log(res)
+              },
+              fail: function () {
+              },
+              complete: function () {
+              }
+            }),
+              that.setData({
+                list: newlist
+              })
+          }
+        },
+        fail: function (res) { },
+        complete: function (res) { },
+      })
+    }
+  }
 })
