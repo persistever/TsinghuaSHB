@@ -133,15 +133,15 @@ Page({
   },
   bindAuthorizeButton(e) {
     var that = this
-    app.globalData.userInfo = e.detail.userInfo
+    app.globalData.userInfo = e.detail.userInfo  //已经能够初步获取用户的昵称、头像、地区、性别等信息，但是还不能获取微信用户的唯一ID，openid
     app.globalData.userNickName=e.detail.userInfo['nickName']
     wx.login({
-      success: function (res1) {
+      success: function (res1) {  //获取微信授权，得到授权访问码code，为了进一步得到微信用户的唯一ID，openid
         if (res1.code) {
           that.setData({
             haveAuth: true
           })
-          // 发起网络请求
+          // 发起网络请求，以授权访问码code换取微信用户的唯一ID，openid
           wx.request({
             url:that.data.serverURL+'getOpenID.php',
             data: {
@@ -197,7 +197,6 @@ Page({
         }
       }
     })
-    
   },
   bindGetInputCode(e){
     var that = this

@@ -176,8 +176,9 @@ Page({
           wx.request({
             url: app.globalData.serverURL + 'deleteCollect.php',
             data: {
-              delete_itemid: _itemid,
-              delete_userid: _userid
+              useServer: that.data.userServer,
+              itemID: _itemid,
+              userID: _userid
             },
             success: function (res) {
               console.log(res)

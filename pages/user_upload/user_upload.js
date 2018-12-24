@@ -146,11 +146,10 @@ Page({
     var _itemid = e.currentTarget.dataset.aid
     var _itemsold = e.currentTarget.dataset.sold
     var _itempublished = e.currentTarget.dataset.publish
-    var _statuschangetype
+    var _statuschangetype  //这个值就作为送给服务器的操作标识吧，-1：恢复发布，0：已卖，1：不想卖了，2：隐藏发布
     var del = false
     var that = this
     if (_itemsold == 0 && _itempublished == 1) {
-      _statuschangetype = 0
       wx.showActionSheet({
         //三个list分别对应itemIsSold，itemIsDelete和itemIsPublished
         itemList: ['这本书已经卖出去啦！', '这本书我不想卖了。。。', '你等我考虑考虑要不要卖'],
@@ -166,15 +165,18 @@ Page({
             del = true
             for (let i = 0; i < len; i++) {
               var temp = oldlist.shift()
-              if ((temp['itemID'] == _itemid) && (res.tapIndex == 1)) {
-                continue
-              }
-              else if ((temp['itemID'] == _itemid) && (res.tapIndex == 0)) {
+              if ((temp['itemID'] == _itemid) && (res.tapIndex == 0)) {
                 temp.itemIsSold = 1;
+                _statuschangetype = 0
                 newlist.push(temp)
+              }
+              else if ((temp['itemID'] == _itemid) && (res.tapIndex == 1)) {
+                _statuschangetype = 1
+                continue
               }
               else if ((temp['itemID'] == _itemid) && (res.tapIndex == 2)) {
                 temp.itemIsPublished = 0;
+                _statuschangetype = 2
                 newlist.push(temp)
               }
               else {
@@ -182,14 +184,14 @@ Page({
               }
             }
             wx.request({
-              url: app.globalData.serverURL + 'deleteUserUpload.php',
+              url: app.globalData.serverURL + 'DeleteUserUpload.php',
               data: {
-                delete_itemid: _itemid,
-                delete_userid: _userid,
+                useServer: that.data.userServer,
+                itemID: _itemid,
+                userID: _userid,
                 status: _statuschangetype
               },
               success: function (res) {
-                console.log(res)
               },
               fail: function () {
               },
@@ -206,9 +208,8 @@ Page({
       })
     }
     else if (_itempublished == 0){
-      _statuschangetype = 1
+      _statuschangetype = -1
       wx.showActionSheet({
-        //三个list分别对应itemIsSold，itemIsDelete和itemIsPublished
         itemList: ['我决定了！我还是卖它'],
         //itemColor: 'skyblue',
         success: function (res) {
@@ -231,11 +232,12 @@ Page({
               }
             }
             wx.request({
-              url: app.globalData.serverURL + 'deleteUserUpload.php',
+              url: app.globalData.serverURL + 'DeleteUserUpload.php',
               data: {
-                delete_itemid: _itemid,
-                delete_userid: _userid,
-                _statuschangetype
+                useServer: that.data.userServer,
+                itemID: _itemid,
+                userID: _userid,
+                status: _statuschangetype  //status = -1表示重新上架
               },
               success: function (res) {
                 console.log(res)
