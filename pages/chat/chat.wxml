@@ -10,8 +10,12 @@
     <view><text class='book_info'>资料名：{{itemName}}</text></view>
     <view><text class='book_info'>价格：{{itemPrice}}</text></view>
     <view><text class='book_info'>简介：{{itemShortInfo}}</text></view>
-    <!-- <view><text class='book_status'>{{bookstatus}}</text></view> 目前后台还没有这个接口，等一下-->
-    <view><text class='book_info'>在售</text></view>
+    <block wx:if="{{itemIsSold==0 && itemIsPublished==1 && itemIsDelete==0}}">
+      <view><text class='book_info'>在售</text></view>
+    </block>
+    <block wx:else>
+      <view><text class='book_info'>已下架</text></view>
+    </block>
   </view>
   </view>
 </view>

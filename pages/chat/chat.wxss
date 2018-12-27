@@ -62,7 +62,7 @@ page {
 .time {
   text-align: center;
   padding: 5rpx 20rpx 5rpx 20rpx;
-  font-size: 20rpx;
+  font-size: 30rpx;
   background-color: #E8E8E8;
 }
 
