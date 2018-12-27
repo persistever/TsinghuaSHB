@@ -56,7 +56,7 @@
 </block>
 <block wx:else>
   <view class="confirm">
-    <block wx:if="{{buyerID==userID||buyerID==theOtherUserID}}">
+    <block wx:if="{{itemIsSold==1}}">
       <button bindtap="bookConfirm" class='confirmbutton' disabled='true'>交易已达成</button>
     </block>
   </view>

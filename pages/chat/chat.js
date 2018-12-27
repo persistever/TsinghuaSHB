@@ -28,7 +28,6 @@ Page({
 
     userID: null,
     sellerID: null,
-    buyerID:null,
     itemID: null,
     itemCoverPath: null,
     itemName: null,
@@ -58,6 +57,7 @@ Page({
     // 调用函数时，传入new Date()参数，返回值是日期和时间
     var time = util.formatTime(new Date());
     // 再通过setData更改Page()里面的data，动态更新页面的数据
+    var that = this
     
     this.setData({
       date_time: time,
@@ -71,7 +71,7 @@ Page({
     
     if (wx.getStorageInfoSync().keys.indexOf(that.data.messageName) == -1) {
       let messageNameTemp = 'msg_' + that.data.itemID + '_' + that.data.theOtherUserID
-      //console.log(messageNameTemp)
+      console.log(messageNameTemp)
       this.setData({
         messageName: messageNameTemp
       })
@@ -163,7 +163,6 @@ Page({
         }
         else {
           var bid = null
-          var issold = null
           that.setData({
             confirmStatus:1
           })
@@ -186,8 +185,7 @@ Page({
               console.log('[chat.js][交易确认] success');
               console.log(res.data)
               that.setData({
-                issold: res.data['itemIsSold'],
-                buyerID: res.data['itemBuyerID']
+                itemIsSold: res.data['itemIsSold'],
               })
             },
             fail: function () {
