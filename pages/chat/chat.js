@@ -31,6 +31,9 @@ Page({
     itemCoverPath: null,
     itemName: null,
     itemPrice: null,
+    itemIsSold: null,
+    itemIsPublished: null,
+    itemIsDelete: null,
     isComeFromDetailPage: false,
     messageInput: '',
     messageList: [],
@@ -73,13 +76,17 @@ Page({
         itemID: that.data.itemID,
       },
       success: function (res) {
-        //console.log(res.data)
+        console.log('[chat.js][返回聊天针对的书籍信息]  success');
+        console.log(res.data)
         that.setData({
           itemName: res.data['itemName'],
           itemPrice: '￥' + res.data['itemPrice'],
           itemShortInfo: res.data['itemShortInfo'],
           itemCoverPath: res.data['itemPicturePathList'][0],
           itemUserID: res.data['itemUserID'],
+          itemIsSold: res.data['itemIsSold'],
+          itemIsDelete: res.data['itemIsDelete'],
+          itemIsPublished: res.data['itemIsPublished'],
         })
       },
       fail: function () {

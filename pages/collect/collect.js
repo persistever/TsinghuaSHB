@@ -41,7 +41,7 @@ Page({
         userID: app.globalData.userID
       },
       success: function (res) {
-        //console.log(res.data)
+        console.log(res.data)
         that.setData({
           list: res.data
         })
@@ -66,7 +66,7 @@ Page({
         userID: app.globalData.userID
       },
       success: function (res) {
-        // console.log("success")
+        //console.log("success")
         console.log(res.data)
         // console.log(res.statusCode)
         that.setData({

@@ -6,7 +6,7 @@
   <view class="nav_section">
     <view wx:if="{{list}}">
       <block wx:for="{{list}}" wx:key="item.itemID">
-        <view class="nav_section_items" bindtap="navigateDetail" bindlongpress="uploaddel" data-aid="{{item.itemID}}"  data-sold="{{item.itemIsSold}}"  data-publish="{{item.itemIsPublished}}" >
+        <view class="nav_section_items" bindlongpress="uploaddel" data-aid="{{item.itemID}}"  data-sold="{{item.itemIsSold}}"  data-publish="{{item.itemIsPublished}}" >
           <!--image-->
           <view class="section_image" data-aid="{{item.itemID}}">
             <block wx:if="{{item.itemCoverPath}}">

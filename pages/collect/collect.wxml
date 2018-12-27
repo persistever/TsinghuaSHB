@@ -18,7 +18,7 @@
           </view>
           <!--content-->
           <view class="section_cont" data-aid="{{item.itemID}}">
-            <view wx:if="{{item.itemIsSold==0 && item.itemIsPublished==1 && item.itenIsDelete==0}}"  class="section_cont_sub">
+            <view wx:if="{{item.itemIsSold==0 && item.itemIsPublished==1 && item.itemIsDelete==0}}"  class="section_cont_sub">
               <text>{{item.itemName}}</text>
             </view>
             <view wx:else class="section_cont_sub" data-aid="{{item.itemID}}">
@@ -28,7 +28,7 @@
             <view>{{item.itemShortInfo}}</view>
           </view>
           <!--book-->
-          <view wx:if="{{item.itemIsSold==0 && item.itemIsPublished==1 && item.itenIsDelete==0}}" class="section_book" bindtap="navigateDetail" data-aid="{{item.itemID}}">
+          <view wx:if="{{item.itemIsSold==0 && item.itemIsPublished==1 && item.itemIsDelete==0}}" class="section_book" bindtap="navigateDetail" data-aid="{{item.itemID}}">
             <text>查看</text>
           </view>
         </view>
