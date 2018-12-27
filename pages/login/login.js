@@ -58,13 +58,43 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+    var that = this
+    wx.request({
+      url: that.data.serverURL + "getHistoryMessage.php",
+      data: {
+        useServer: that.data.useServer,
+        userID: app.globalData.userID
+      },
+      success: function (res) {
+        console.log('[login.js][获取历史Message数据] success')
+        console.log(res)
+        for (let i = 0; i < res.data.length; i++) {
+          var tempMessage = res.data[i]
+          var tempNameList = wx.getStorageSync('messageNameList')
+          if (tempNameList.indexOf(tempMessage['messageName']) == -1) {
+            tempNameList.unshift(tempMessage['messageName'])
+            wx.setStorageSync('messageNameList', tempNameList)
+            wx.setStorageSync(tempMessage['messageName'], [])
+          }
+          var tempMessageList = wx.getStorageSync(tempMessage['messageName'])
+          tempMessageList.push(tempMessage)
+          wx.setStorageSync(tempMessage['messageName'], tempMessageList)
+        }
+        console.log(wx.getStorageInfoSync().keys)
+      },
+      fail: function () {
+        console.log('[login.js][获取历史Message数据]  fail');
+      },
+      complete: function () {
+        // console.log("complete")
+      }
+    })
 
   },
 
