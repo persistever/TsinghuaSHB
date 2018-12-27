@@ -34,7 +34,7 @@
 .save{
   margin-top: 20rpx;
   border-radius: 30rpx;
-    background-color:gray;
+  background-color:gray;
 }
 
 .nosave{

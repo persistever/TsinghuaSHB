@@ -27,6 +27,8 @@ Page({
     date_time: '',
 
     userID: null,
+    sellerID: null,
+    buyerID:null,
     itemID: null,
     itemCoverPath: null,
     itemName: null,
@@ -35,9 +37,7 @@ Page({
     itemIsPublished: null,
     itemIsDelete: null,
     isComeFromDetailPage: false,
-    itemIsSold:null,
-    itemIsPublished:null,
-    itemIsDelete:null,
+    confirmStatus:0,
     messageInput: '',
     messageList: [],
     messageName: null,
@@ -58,7 +58,7 @@ Page({
     // 调用函数时，传入new Date()参数，返回值是日期和时间
     var time = util.formatTime(new Date());
     // 再通过setData更改Page()里面的data，动态更新页面的数据
-    var that = this
+    
     this.setData({
       date_time: time,
       userID: app.globalData.userID,
@@ -67,36 +67,8 @@ Page({
       theOtherUserID: e.theOtherUserID,
       messageName: 'msg_' + e.itemID + '_' + e.theOtherUserID,
     })
-    //console.log('[chat.js][查看是否被正确赋值]')
-    //console.log(that.data)
 
-    wx.request({
-      url: that.data.serverURL + "detail.php",
-      data: {
-        useServer: that.data.useServer,
-        serverURL: that.data.serverURL,
-        itemID: that.data.itemID,
-      },
-      success: function (res) {
-        console.log(res.data)
-        that.setData({
-          itemName: res.data['itemName'],
-          itemPrice: '￥' + res.data['itemPrice'],
-          itemShortInfo: res.data['itemShortInfo'],
-          itemCoverPath: res.data['itemPicturePathList'][0],
-          itemUserID: res.data['itemUserID'],
-          itemIsSold: res.data['itemIsSold'],
-          itemIsDelete: res.data['itemIsDelete'],
-          itemIsPublished: res.data['itemIsPublished']
-        })
-      },
-      fail: function () {
-        console.log('[chat.js][onLoad请求数据]  fail')
-      },
-      complete: function () {
-        // console.log("complete")
-      }
-    })
+    
     if (wx.getStorageInfoSync().keys.indexOf(that.data.messageName) == -1) {
       let messageNameTemp = 'msg_' + that.data.itemID + '_' + that.data.theOtherUserID
       //console.log(messageNameTemp)
@@ -116,14 +88,44 @@ Page({
     }
     else {
       //console.log('查看message的值')
-      //console.log(that.data.messageList)
       that.setData({
-        messageList: wx.getStorageSync(that.data.messageName),
+        messageList: wx.getStorageSync(that.data.messageName).reverse(),
         timer: setInterval(that.checkMessage, that.data.tiemSecond)
       })
     }
     //console.log('[chat.js][查看messsageList的Name：messageName是否写入存储]')
     //console.log(wx.getStorageInfoSync().keys)
+  },
+  onShow: function(e) {
+    var that = this
+    wx.request({
+      url: that.data.serverURL + "detail.php",
+      data: {
+        useServer: that.data.useServer,
+        serverURL: that.data.serverURL,
+        itemID: that.data.itemID,
+      },
+      success: function (res) {
+        console.log(res.data)
+        that.setData({
+          sellerID: res.data['itemUserID'],
+          buyerID: res.data['itemBuyerID'],
+          itemName: res.data['itemName'],
+          itemPrice: '￥' + res.data['itemPrice'],
+          itemShortInfo: res.data['itemShortInfo'],
+          itemCoverPath: res.data['itemPicturePathList'][0],
+          itemIsSold: res.data['itemIsSold'],
+          itemIsDelete: res.data['itemIsDelete'],
+          itemIsPublished: res.data['itemIsPublished']
+        })
+      },
+      fail: function () {
+        console.log('[chat.js][onLoad请求数据]  fail')
+      },
+      complete: function () {
+        // console.log("complete")
+      }
+    })
   },
 
   onHide: function () {
@@ -148,13 +150,65 @@ Page({
     }
   },
 
-  bindMessageInput(e) {
+  bookConfirm: function (){
+    var that = this
+    wx.showModal({
+      title: '',
+      content: '双方点击【交易完成】后商品视为卖出自动下架。如果您是卖家，对同一本书的请求以时间最靠后的为准。是否继续',
+      showCancel: true,
+      cancelColor: 'skyblue',
+      confirmColor: 'skyblue',
+      success: function (res) {
+        if (res.cancel) {
+          //点击取消,默认隐藏弹框
+        }
+        else {
+          var bid = null
+          var issold = null
+          that.setData({
+            confirmStatus:1
+          })
+          if(that.data.userID==that.data.sellerID){
+            bid = that.data.theOtherUserID
+          }
+          else{
+            bid = that.data.userID
+          }
+          if (bid == that.data.buyerID) {
+            issold = 1
+          }
+          else {
+            issold = 0
+          }
+          wx.request({
+            url: that.data.serverURL + "deal.php",
+            data:{
+              itemID:that.data.itemID,
+              itemUserID:that.data.sellerID,
+              itemBuyerID: bid,
+              itemIsSold: issold,
+            },
+            success: function (res) {
+            },
+            fail: function () {
+            },
+            complete: function () {
+            }
+          })
+        }
+      },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
+
+  bindMessageInput: function(e) {
     this.setData({
       messageInput: e.detail.value
     })
   },
 
-  bindMessageSend() {
+  bindMessageSend: function(){
     var that = this
     var messageInput = util.trim(that.data.messageInput)
     //console.log('[chat.js][打印输入的字符串]  ' + messageInput)
@@ -185,7 +239,7 @@ Page({
           //console.log('[chat.js][查看messsageList：message是否写入存储]')
           //console.log(wx.getStorageSync(that.data.messageName))
           that.setData({
-            messageList: messageListTemp,
+            messageList: messageListTemp.reverse(),
             messageInput: '',
           })
         },
@@ -238,9 +292,8 @@ Page({
           //console.log('[chat.js][查看messsageList：message返回值是否写入存储]')
           //console.log(wx.getStorageSync(that.data.messageName))
           that.setData({
-            messageList: messageListTemp,
+            messageList: messageListTemp.reverse(),
           })
-          //console.log(that.data.messageList)
         }
 
       },

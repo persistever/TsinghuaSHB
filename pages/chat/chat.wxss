@@ -1,13 +1,14 @@
-/* pages/index/to_news/to_news.wxss */
+/*书籍信息*/
  
 page {
   background-color: #f7f7f7;
 }
 
 .tab {
-  /* padding: 20rpx 20rpx 40rpx 50rpx; */
-  padding: 20rpx;
-  height: 270rpx;
+  position: fixed;
+  padding: 10rpx;
+  height: 250rpx;
+  width: 750rpx;
   background-color: purple;
 }
 
@@ -39,26 +40,37 @@ page {
   height: 80rpx;
   width: 90rpx;
 }
- 
-/* 聊天内容 */
-.chatview{
+
+/* 提示信息*/
+.notice{
+  position: fixed;
+  top: 260rpx;
+  height: 40rpx;
+  width: 740rpx;
   text-align: center;
-  margin-top:100rpx;
-  margin-bottom: 150rpx;
-}
-.chatshow {
-  color:aliceblue;
-  display: flex;
-  flex-direction: column-reverse;
-  height: 90%;
-  width: 100%;
 }
 
+.msg{
+  font-size: 32rpx;
+  color: gold;
+}
+/* 聊天内容*/
+
 .chatbody {
+  position: fixed;
+  top: 300rpx;
+  bottom: 200rpx;
+  color:aliceblue;
+  width: 750rpx;
+  text-align: center;
   display: flex;
   padding-top: 5rpx;
 }
 
+.oneMessage{
+  height: 150rpx;
+  width: 750rpx;
+}
 .time {
   text-align: center;
   padding: 5rpx 20rpx 5rpx 20rpx;
@@ -69,13 +81,13 @@ page {
 .my_right {
   float: right;
   position: relative;
-  right: 40rpx;
+  right: 30rpx;
 }
  
 .you_left {
   float: left;
   position: relative;
-  left: 5rpx;
+  left: 30rpx;
 }
  
 .new_img {
@@ -118,4 +130,18 @@ page {
   color: #000;
   line-height: 80rpx;
   font-size: 28rpx;
+}
+
+.confirm{
+  position:fixed;
+  bottom: 120rpx;
+  right:20rpx;
+  width:250rpx;
+}
+
+.confirmbutton{
+  font-size: 30rpx;
+  border-radius: 30rpx;
+  border: 1rpx solid gray;
+  background-color: white;
 }

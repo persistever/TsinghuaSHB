@@ -20,46 +20,47 @@
   </view>
 </view>
 
+<view class='notice'>
+  <text class='msg'>请在线下交易结束后点击【交易完成】</text>
+</view>
 <!--下半部分聊天view-->
-<view class="chatview">
-  <view class="chatshow">
-    <scroll-view scroll-y="true" scroll-top="{{scrolltop}}" class="chatbody" wx:for="{{messageList}}">
+<scroll-view scroll-y="true" class="chatbody">
+  <block wx:for="{{messageList}}">
+    <view class="oneMessage">
       <view>
         <text class='time'>{{item.messageSendTime}}</text> 
       </view>
       <block wx:if="{{item.messageSendUserID ==userID}}">
         <view class='my_right'>
-          <!-- <text wx:if='{{!item.is_img}}' class='new_txt'>"{{item.messageInput}}"</text> -->
           <text class='new_txt'>{{item.messageInput}}</text>
-          <!-- <image wx:if='{{item.is_img}}' src='\images\banner_1/{{item.content}}' class='new_imgtent'></image> -->
-          <!-- <view wx:if='{{!item.is_img}}' class='sanjiao my'></view> -->
-          <!-- <image class='new_img' wx:if='{{item.show_rignt == "是自己的内容，显示在右边，右边渲染 nickname_owner，
-
-  head_owner"}}' src='{{item.head_owner}}'></image> -->
-            <!-- <image class='new_img' wx:if='{{item.show_rignt == "是自己的内容，显示在右边，右边渲染 nickname_open，
-
-  head_open"}}' src='{{item.head_open}}'></image> -->
         </view>
       </block>
       <block wx:else>
         <view class='you_left'>
-            <!-- <image class='new_img' wx:if='{{item.show_rignt == "不是自己的内容，显示在左边，左边渲染 nickname_owner，
-
-    head_owner"}}' src='{{item.head_owner}}'></image> -->
-              <!-- <image class='new_img' wx:if='{{item.show_rignt == "不是自己的内容，显示在左边，左边渲染 nickname_open，
-
-    head_open"}}' src='{{item.head_open}}'></image> -->
-            <!-- <view wx:if='{{!item.is_img}}' class='sanjiao you'></view> -->
-            <!-- <text wx:if='{{!item.is_img}}' class='new_txt'>{{item.messageInput}}</text> -->
-            <text class='new_txt'>{{item.messageInput}}</text>
-            <!-- <image wx:if='{{item.is_img}}' src='http://sz800800.cn/Uploads/{{item.content}}' class='new_imgtent'></image> 
-
-    -->
+          <text class='new_txt'>{{item.messageInput}}</text>
         </view>
       </block>
-    </scroll-view>
+    </view>
+  </block>
+</scroll-view>
+
+<block wx:if="{{itemIsSold==0 && itemIsPublished==1 && itemIsDelete==0}}">
+  <view class="confirm">
+    <block wx:if="{{confirmStatus==0}}">
+      <button bindtap="bookConfirm" class='confirmbutton'>交易完成</button>
+    </block>
+    <block wx:if="{{confirmStatus==1}}">
+      <button bindtap="bookConfirm" class='confirmbutton' disabled='true'>等待对方确认</button>
+    </block>
   </view>
-</view>
+</block>
+<block wx:else>
+  <view class="confirm">
+    <block wx:if="{{buyerID==userID||buyerID==theOtherUserID}}">
+      <button bindtap="bookConfirm" class='confirmbutton' disabled='true'>交易已达成</button>
+    </block>
+  </view>
+</block>
 
 <!--发送信息-->
 <view class="sendmessage">
