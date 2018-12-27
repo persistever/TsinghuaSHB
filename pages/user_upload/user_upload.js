@@ -151,8 +151,8 @@ Page({
     var that = this
     if (_itemsold == 0 && _itempublished == 1) {
       wx.showActionSheet({
-        //三个list分别对应itemIsSold，itemIsDelete和itemIsPublished
-        itemList: ['这本书已经卖出去啦！', '这本书我不想卖了。。。', '你等我考虑考虑要不要卖'],
+        //2个list分别对应itemIsDelete和itemIsPublished
+        itemList: ['这本书我不想卖了。。。', '你等我考虑考虑要不要卖'],
         //itemColor: 'skyblue',
         success: function (res) {
           if (res.cancel) {

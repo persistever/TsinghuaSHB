@@ -1,12 +1,13 @@
-<import src="../search/search.wxml"/>
+<!--pages/userSold/userSold.wxml-->
+<!--pages/collect/collect.wxml-->
 
 <view class="container">
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
   <!--list-->
   <view class="nav_section">
-    <view wx:if="{{list}}">
+  <view wx:if="{{list}}">
       <block wx:for="{{list}}" wx:key="item.itemID">
-        <view class="nav_section_items" bindlongpress="uploaddel" data-aid="{{item.itemID}}"  data-sold="{{item.itemIsSold}}"  data-publish="{{item.itemIsPublished}}" >
+        <view class="nav_section_items" bindlongpress="collectdel" data-aid="{{item.itemID}}">
           <!--image-->
           <view class="section_image" data-aid="{{item.itemID}}">
             <block wx:if="{{item.itemCoverPath}}">
@@ -17,16 +18,8 @@
             </block>
           </view>
           <!--content-->
-          <view class="section_cont">
-          <!--
-            <view wx:if="{{item.itemIsSold == 1}}" class="section_cont_sub">
-              <text>{{item.itemName}}(已售出)</text>
-            </view>
-            -->
-            <view wx:if="{{item.itemIsPublished == 0}}" class="section_cont_sub">
-              <text>{{item.itemName}}（暂时不对外出售）</text>
-            </view>
-            <view wx:if="{{item.itemIsPublished == 1 && item.itemIsSold == 0}}" class="section_cont_sub">
+          <view class="section_cont" data-aid="{{item.itemID}}">
+            <view class="section_cont_sub">
               <text>{{item.itemName}}</text>
             </view>
             <view class="section_cont_price">价格：{{item.itemPrice}}</view>
@@ -38,8 +31,8 @@
           </view>
         </view>
       </block>  
-    </view>
-    <view wx:else>亲，赶快去发布吧~</view>
+      </view>
+    <view wx:else>暂无数据</view>
   </view>
 </scroll-view>
 </view>

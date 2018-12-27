@@ -10,7 +10,9 @@
     "pages/test/test",
     "pages/collect/collect",
     "pages/user_upload/user_upload",
-    "pages/chat/chat"
+    "pages/chat/chat",
+    "pages/userBought/userBought",
+    "pages/userSold/userSold"
   ],
   "window": {
     "backgroundTextStyle": "dark",

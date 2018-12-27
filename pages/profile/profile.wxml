@@ -9,8 +9,8 @@
             <open-data type="userNickName" lang="zh_CN"></open-data>
             <!--<text class="text">{{userInfo.nickName}}</text>-->
         </view>
-        <view class="user-text">
-            <open-data type="userSocre" lang="zh_CN"></open-data>
+        <view class="user-text1">
+            <text>我是一个</text><open-data type="userSocre"></open-data><text class="jump">分的好青年</text>
             <!--<text class="text">{{userInfo.nickName}}</text>-->
         </view>
     </view>

@@ -14,11 +14,11 @@
 .user-head .center{
     display: flex;
     flex-flow: column;
-    padding-top: 100rpx;
+    padding-top: 0rpx;
 }
 .user-img{
-  width:300rpx;
-  height: 300rpx;
+  width:250rpx;
+  height: 250rpx;
 }
 
 .user-img image {
@@ -38,11 +38,21 @@
   font-size: 40rpx;
   margin-top: 30rpx;
 }
-
+.user-text1{
+  text-align:center;
+  width:100%;
+}
+.user-text1 text{
+  font-family: 微软雅黑;
+  color:#333;
+  display: block;
+  font-size: 30rpx;
+  margin-top: 30rpx;
+}
 
 .list {
   background: #fff;
-  margin-top:50rpx;
+  margin-top:100rpx;
 }
 .list .item{
   padding:40rpx 30rpx;

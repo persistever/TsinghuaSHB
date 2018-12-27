@@ -18,6 +18,15 @@ Page({
     //订单
     wx.navigateTo({ url: "/pages/collect/collect" })
   },
+
+  user_bought: function () {
+    wx.navigateTo({ url: "../../pages/userBought/userBought" });
+  },
+
+  user_sold: function () {
+    //订单
+    wx.navigateTo({ url: "/pages/userSold/userSold" })
+  },
   onShareAppMessage: function () {
   }
 })
