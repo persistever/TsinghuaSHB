@@ -153,8 +153,10 @@ Page({
       title: '是否删除该收藏书目',
       content: '',
       showCancel: true,
-      cancelColor: 'skyblue',
-      confirmColor: 'skyblue',
+      cancelText: '否',
+      cancelColor: 'blue',
+      confirmText: '是',
+      confirmColor: 'blue',
       success: function (res) {
         if (res.cancel) {
           //点击取消,默认隐藏弹框

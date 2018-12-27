@@ -155,8 +155,10 @@ Page({
       title: '',
       content: '双方点击【交易完成】后商品视为卖出自动下架。如果您是卖家，对同一本书的请求以时间最靠后的为准。是否继续',
       showCancel: true,
-      cancelColor: 'skyblue',
-      confirmColor: 'skyblue',
+      cancelText: '否',
+      cancelColor: 'blue',
+      confirmText: '是',
+      confirmColor: 'blue',
       success: function (res) {
         if (res.cancel) {
           //点击取消,默认隐藏弹框
