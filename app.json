@@ -9,7 +9,7 @@
     "pages/search/search",
     "pages/test/test",
     "pages/collect/collect",
-    "pages/user_upload/user_upload",
+    "pages/userUpload/userUpload",
     "pages/chat/chat",
     "pages/userBought/userBought",
     "pages/userSold/userSold",

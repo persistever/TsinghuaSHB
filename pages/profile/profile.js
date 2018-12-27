@@ -38,7 +38,7 @@ Page({
   },
 
   user_upload: function () {
-    wx.navigateTo({ url: "../../pages/user_upload/user_upload" });
+    wx.navigateTo({ url: "../../pages/userUpload/userUpload" });
   },
 
   collect: function () {
