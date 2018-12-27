@@ -117,8 +117,10 @@ Page({
           wx.request({
             url: app.globalData.serverURL + 'deleteMessage.php',
             data: {
+              userServer: that.data.userServer,
               delete_itemid: _itemid,
-              delete_userid: _userid
+              delete_userid: _userid,
+              thisUserID: app.globalData.userID,
             },
             success: function (res) {
               console.log(res)
