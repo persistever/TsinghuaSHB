@@ -12,7 +12,8 @@
     "pages/user_upload/user_upload",
     "pages/chat/chat",
     "pages/userBought/userBought",
-    "pages/userSold/userSold"
+    "pages/userSold/userSold",
+    "pages/grade/grade"
   ],
   "window": {
     "backgroundTextStyle": "dark",
