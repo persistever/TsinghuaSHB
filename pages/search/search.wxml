@@ -12,6 +12,11 @@
 </view>
 <template is="wxSearch" data="{{wxSearchData}}"/>
 <view hidden="{{searchBackHidden}}" class="nav_section">
+      <view class="wxSearch-section">
+        <picker bindchange="bindGetSearchSort"  value="{{searchSort}}" range="{{searchSortList}}">
+          <view class="tui-picker-detail">{{searchSortList[searchSort]}}</view>
+        </picker>
+      </view>
       <block wx:if="{{wxSearchBackData.length>0}}">
           <view wx:for="{{wxSearchBackData}}" wx:key="item.itemID">
               <view class="nav_section_items"  bindtap="navigateDetail" data-aid="{{item.itemID}}">

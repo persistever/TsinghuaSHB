@@ -6,7 +6,9 @@ Page({
   data: {
     useServer: app.globalData.useServer,
     serverURL: app.globalData.serverURL,
-    searchHotKeyList: null
+    searchHotKeyList: null,
+    searchSortList: ['按时间降序','按时间升序','按价格升序','按价格降序'],
+    searchSort: 0
   },
   onLoad: function () {
     console.log('onLoad')
@@ -72,7 +74,12 @@ Page({
     var that = this
     WxSearch.wxSearchHiddenPancel(that);
   },
-
+  bindGetSearchSort:function(e){
+    var that = this
+    that.setData({
+      searchSort: e.detail.value
+    })
+  },
   // do something to jump to another page
   navigateDetail: function (e) {
     wx.navigateTo({
@@ -92,7 +99,7 @@ Page({
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
         searchInput: searchText,
-        searchType: 0,
+        searchSort: that.data.searchSort,
       },
       success: function (res) {
         console.log(res.data)
