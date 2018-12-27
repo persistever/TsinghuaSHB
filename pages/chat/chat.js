@@ -109,7 +109,6 @@ Page({
         console.log(res.data)
         that.setData({
           sellerID: res.data['itemUserID'],
-          buyerID: res.data['itemBuyerID'],
           itemName: res.data['itemName'],
           itemPrice: '￥' + res.data['itemPrice'],
           itemShortInfo: res.data['itemShortInfo'],
@@ -174,21 +173,22 @@ Page({
           else{
             bid = that.data.userID
           }
-          if (bid == that.data.buyerID) {
-            issold = 1
-          }
-          else {
-            issold = 0
-          }
           wx.request({
-            url: that.data.serverURL + "deal.php",
+            url: that.data.serverURL + "chat/deal.php",
             data:{
+              userServer: that.data.useServer,
               itemID:that.data.itemID,
               itemUserID:that.data.sellerID,
               itemBuyerID: bid,
-              itemIsSold: issold,
+              thisUserID: app.globalData.userID,
             },
             success: function (res) {
+              console.log('[chat.js][交易确认] success');
+              console.log(res.data)
+              that.setData({
+                issold: res.data['itemIsSold'],
+                buyerID: res.data['itemBuyerID']
+              })
             },
             fail: function () {
             },
