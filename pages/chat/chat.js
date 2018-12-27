@@ -31,6 +31,9 @@ Page({
     itemCoverPath: null,
     itemName: null,
     itemPrice: null,
+    itemIsSold: null,
+    itemIsPublished: null,
+    itemIsDelete: null,
     isComeFromDetailPage: false,
     itemIsSold:null,
     itemIsPublished:null,
@@ -83,8 +86,8 @@ Page({
           itemCoverPath: res.data['itemPicturePathList'][0],
           itemUserID: res.data['itemUserID'],
           itemIsSold: res.data['itemIsSold'],
-          itemIsPublished: res.data['itemIsPublished'],
-          itemIsDelete: res.data['itemIsDelete']
+          itemIsDelete: res.data['itemIsDelete'],
+          itemIsPublished: res.data['itemIsPublished']
         })
       },
       fail: function () {
