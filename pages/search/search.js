@@ -95,7 +95,7 @@ Page({
         searchType: 0,
       },
       success: function (res) {
-        //console.log(res.data)
+        console.log(res.data)
         that.setData({
           wxSearchBackData:res.data
         })

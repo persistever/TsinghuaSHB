@@ -31,10 +31,15 @@ Page({
     itemCoverPath: null,
     itemName: null,
     itemPrice: null,
+    itemIsSold: null,
+    itemIsPublished: null,
+    itemIsDelete: null,
     isComeFromDetailPage: false,
+    itemIsSold:null,
+    itemIsPublished:null,
+    itemIsDelete:null,
     messageInput: '',
     messageList: [],
-    updateMessageNO: 0,  //显示未读信息条数的功能还没有实现，这个变量暂时没用
     messageName: null,
     theOtherUserID: null,
 
@@ -73,13 +78,16 @@ Page({
         itemID: that.data.itemID,
       },
       success: function (res) {
-        //console.log(res.data)
+        console.log(res.data)
         that.setData({
           itemName: res.data['itemName'],
           itemPrice: '￥' + res.data['itemPrice'],
           itemShortInfo: res.data['itemShortInfo'],
           itemCoverPath: res.data['itemPicturePathList'][0],
           itemUserID: res.data['itemUserID'],
+          itemIsSold: res.data['itemIsSold'],
+          itemIsDelete: res.data['itemIsDelete'],
+          itemIsPublished: res.data['itemIsPublished']
         })
       },
       fail: function () {
