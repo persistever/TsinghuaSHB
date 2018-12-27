@@ -21,7 +21,7 @@
             <view wx:if="{{item.itemIsSold==0 && item.itemIsPublished==1 && item.itemIsDelete==0}}"  class="section_cont_sub">
               <text>{{item.itemName}}</text>
             </view>
-            <view wx:else class="section_cont_sub" data-aid="{{item.itemID}}">
+            <view wx:else class="section_cont_sub" >
               <text>{{item.itemName}} (已下架)</text>
             </view>
             <view class="section_cont_price">价格：{{item.itemPrice}}</view>
