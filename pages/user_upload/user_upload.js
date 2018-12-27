@@ -166,15 +166,10 @@ Page({
             for (let i = 0; i < len; i++) {
               var temp = oldlist.shift()
               if ((temp['itemID'] == _itemid) && (res.tapIndex == 0)) {
-                temp.itemIsSold = 1;
-                _statuschangetype = 0
-                newlist.push(temp)
-              }
-              else if ((temp['itemID'] == _itemid) && (res.tapIndex == 1)) {
                 _statuschangetype = 1
                 continue
               }
-              else if ((temp['itemID'] == _itemid) && (res.tapIndex == 2)) {
+              else if ((temp['itemID'] == _itemid) && (res.tapIndex == 1)) {
                 temp.itemIsPublished = 0;
                 _statuschangetype = 2
                 newlist.push(temp)
