@@ -1,3 +1,4 @@
 @import "./wxSearch/wxSearch.wxss";
 @import "./../index/index.wxss";
+@import "./../publish/publish.wxss";
 

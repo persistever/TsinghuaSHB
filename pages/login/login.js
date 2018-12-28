@@ -24,6 +24,7 @@ Page({
     haveRegister: false,
     timer: null,
     countDownNum: 60,
+    userIsBlocked: 0,
   },
 
   /**
@@ -199,13 +200,22 @@ Page({
                   //console.log('[login.js][查看是否已注册] success ')
                   //console.log(res3)
                   if (res3.data['haveRegister'] == true) {
-                    app.globalData.userEmail = res3.data['userEmail']
-                    app.globalData.userID = res3.data['userID'];
-                    //console.log('[login.js][查看是否已经有了用户所有信息]')
-                    //console.log(app.globalData)
-                    wx.reLaunch({
-                      url: '../index/index'
-                    })
+                    if(!res3.data['userIsBlocked']){
+                      app.globalData.userEmail = res3.data['userEmail']
+                      app.globalData.userID = res3.data['userID'];
+                      //console.log('[login.js][查看是否已经有了用户所有信息]')
+                      //console.log(app.globalData)
+                      wx.reLaunch({
+                        url: '../index/index'
+                      })
+                    } else {
+                      wx.showToast({
+                        title: "由于您评分太低，已经被拉入系统黑名单，禁止登陆！请发邮件至：jiaxh17@mails.tsinghua.edu.cn申诉",
+                        icon: 'none',
+                        duration: 10000
+                      })
+                    }
+                    
                   }
                   else{  
                     that.setData({

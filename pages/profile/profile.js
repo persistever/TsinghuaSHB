@@ -4,14 +4,41 @@ var app = getApp()
 
 Page({
   data: {
+    serverURL: app.globalData.serverURL,
+    useServer: app.globalData.useServer,
     userInfo: {},
+    userGrade: null,
+    
   },
 
   onLoad: function () {
+    
+  },
+
+  onShow: function(){
+    var that = this
+    wx.request({
+      url: that.data.serverURL + "profile/GetUserInfo.php",
+      data: {
+        useServer: that.data.useServer,
+        userID: app.globalData.userID
+      },
+      success: function (res) {
+        that.setData({
+          userGrade: res.data['userGrade']
+        })
+      },
+      fail: function () {
+        console.log('[profile.js][获取用户信息]  fail');
+      },
+      complete: function () {
+        // console.log("complete")
+      }
+    })
   },
 
   user_upload: function () {
-    wx.navigateTo({ url: "../../pages/user_upload/user_upload" });
+    wx.navigateTo({ url: "../../pages/userUpload/userUpload" });
   },
 
   collect: function () {

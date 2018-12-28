@@ -6,7 +6,8 @@
   <view class="nav_section">
   <view wx:if="{{list}}">
       <block wx:for="{{list}}" wx:key="item.itemID">
-        <view class="nav_section_items" bindlongpress="collectdel" data-aid="{{item.itemID}}">
+        <!-- <view class="nav_section_items" bindlongpress="collectdel" data-aid="{{item.itemID}}"> 暂时不提供长按删除购买记录的功能-->
+        <view class="nav_section_items" data-aid="{{item.itemID}}">
           <!--image-->
           <view class="section_image" data-aid="{{item.itemID}}">
             <block wx:if="{{item.itemCoverPath}}">
@@ -25,9 +26,16 @@
             <view>{{item.itemShortInfo}}</view>
           </view>
           <!--book-->
-          <view class="section_book" bindtap="navigateDetail" data-aid="{{item.itemID}}">
-            <text>查看</text>
-          </view>
+          <block wx:if="{{item.isBuyerGraded==0}}">
+            <view class="section_book" bindtap="navigateGrade" data-aid="{{item.itemID}}">
+              <text>评价</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="section_book">
+              <text>已评价</text>
+            </view>
+          </block>
         </view>
       </block>  
       </view>

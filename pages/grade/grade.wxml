@@ -1,0 +1,10 @@
+<!--pages/grade/grade.wxml-->
+<view style="text-align: center;">
+  <block wx:if="{{sellOrBuy==0}}"><text>给买家 {{theOtherUserNickName}} 打分</text></block>
+  <block wx:elif="{{sellOrBuy==1}}"><text>给卖家 {{theOtherUserNickName}} 打分</text></block>
+  <view>
+    <slider bindchange="bindSliderGradeChange" step="5" min="0" max="100" value="100" show-value/>
+    <button style="background-color: purple;"bindtap="bindButtonGrade">提交评分</button>
+  </view>
+
+</view>

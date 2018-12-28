@@ -34,7 +34,7 @@ Page({
      * 还有deletesoldrecord.php，传给后台itemID和userID
      -------------------------------*/
     wx.request({
-      url: that.data.serverURL + "usersold.php",
+      url: that.data.serverURL + "userSold/usersold.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
@@ -59,7 +59,7 @@ Page({
     wx.showNavigationBarLoading();
     var that = this;
     wx.request({
-      url: that.data.serverURL + "usersold.php",
+      url: that.data.serverURL + "userSold/usersold.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
@@ -95,7 +95,7 @@ Page({
     // 页数+1
     // page = page + 1;
     wx.request({
-      url: that.data.serverURL + "usersold.php",
+      url: that.data.serverURL + "userSold/usersold.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
@@ -122,10 +122,11 @@ Page({
     })
   },
 
-  // 跳转至详情页
-  navigateDetail: function (e) {
+  // 跳转至评价页
+  navigateGrade: function (e) {
     wx.navigateTo({
-      url: '../detail/detail?itemID=' + e.currentTarget.dataset.aid
+      url: '../grade/grade?itemID=' + e.currentTarget.dataset.aid
+        + '&fromPage=userSold'
     })
   },
 
@@ -143,7 +144,7 @@ Page({
     })
   },
 
-  //删除收藏
+  //删除出手记录，前端暂不删除该代码，但该功能暂时不在后端实现，暂不提供访问接口。
   collectdel: function (e) {
     var _userid = app.globalData.userID
     var _itemid = e.currentTarget.dataset.aid
@@ -181,7 +182,6 @@ Page({
               userID: _userid
             },
             success: function (res) {
-              console.log(res)
             },
             fail: function () {
             },

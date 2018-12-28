@@ -6,11 +6,12 @@ App({
     userNickName: null,
     userEmail: null,
     userID: null,
-    //userID: 12,
+    userIsBlocked: 0,
+
+    messageNameList: null,
     //后端协同开发前端时使用，前端开发勿做任何修改-------
     useServer: 1,
     serverURL: 'https://tsinghuashb.idlab-tsinghua.com/TsinghuaSHB/',
-    messageNameList: null,
     //useServer: 0,
     //serverURL: 'localhost/TsinghuaSHB/'
     //-----------------------------------------------

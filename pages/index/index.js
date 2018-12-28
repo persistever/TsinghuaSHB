@@ -24,15 +24,7 @@ Page({
     serverURL: app.globalData.serverURL,
   },
 
-  onLoad: function () {
-    var that = this
-    // navSectionItems 为/utils/data.js中设置的默认数据，
-    // 在有远程服务的时候，应当注释掉
-    // that.setData({
-    //   list: that.data.navSectionItems
-    // })
-
-    
+  onLoad: function () {   
   },
   onShow: function(){
     var that = this
@@ -51,7 +43,7 @@ Page({
          * 其他说明：请求发生之后，服务器会进行响应，无论success还是fail都会执行complete
          -------------------------------*/
     wx.request({
-      url: that.data.serverURL + "index.php",
+      url: that.data.serverURL + "index/Index.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
@@ -76,7 +68,7 @@ Page({
     wx.showNavigationBarLoading();
     var that = this;
     wx.request({
-      url: that.data.serverURL + "index.php",
+      url: that.data.serverURL + "index/Index.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
@@ -110,7 +102,7 @@ Page({
     // 页数+1
     // page = page + 1;
     wx.request({
-      url: that.data.serverURL + "index.php",
+      url: that.data.serverURL + "index/Index.php",
       data: {
         useServer: that.data.useServer,
         serverURL: that.data.serverURL,
