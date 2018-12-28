@@ -1,6 +1,5 @@
-<!--pages/index/to_news/to_news.wxml-->
+<!--聊天页面-->
 <!--上半部分加入书籍图片和信息以及接口的view-->
-
 <view class='tab' bindtap="ToBook">
   <view class='flex'>
   <view>
@@ -44,6 +43,7 @@
   </block>
 </scroll-view>
 
+<!--交易完成按钮-->
 <block wx:if="{{itemIsSold==0 && itemIsPublished==1 && itemIsDelete==0}}">
   <view class="confirm">
     <block wx:if="{{confirmStatus==0}}">

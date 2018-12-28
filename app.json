@@ -7,10 +7,9 @@
     "pages/profile/profile",
     "pages/detail/detail",
     "pages/search/search",
-    "pages/test/test",
-    "pages/collect/collect",
-    "pages/userUpload/userUpload",
     "pages/chat/chat",
+    "pages/userCollect/userCollect",
+    "pages/userUpload/userUpload",
     "pages/userBought/userBought",
     "pages/userSold/userSold",
     "pages/grade/grade"

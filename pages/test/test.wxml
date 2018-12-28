@@ -1,6 +1,0 @@
-<!--pages/test/test.wxml-->
-<view>this is a test for message</view>
-<view>
-<input placeholder="输入消息" auto-focus bindinput="getInputMessage" class="input_msg" type="text" maxlength="50"/>
-<button class="ar_book" bindtap="bindSendMessage">发送消息</button>
-</view>

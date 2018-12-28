@@ -1,4 +1,4 @@
-<!--pages/publish/publish.wxml-->
+<!--书籍发布页-->
 <text>{{netTestValue}}</text>
 <view class="container">
     <view class="ar_cont">

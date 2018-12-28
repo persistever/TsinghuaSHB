@@ -43,7 +43,7 @@ Page({
 
   collect: function () {
     //订单
-    wx.navigateTo({ url: "/pages/collect/collect" })
+    wx.navigateTo({ url: "/pages/userCollect/userCollect" })
   },
 
   user_bought: function () {

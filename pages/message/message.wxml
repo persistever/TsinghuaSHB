@@ -1,3 +1,4 @@
+<!--消息页面-->
 <view wx:if="{{messageList.length==0}}" style="text-align: center;">尚无任何消息~</view>
   <view wx:else>
   <view class="container">

@@ -1,16 +1,12 @@
-<!--index.wxml-->
-<!--<loading hidden="{{!loading}}">
-	{{title}}
-</loading>-->
+<!--首页-->
 <import src="../search/search.wxml"/>
-
+<!--搜索框-->
 <view class="wxSearch-section">
   <view class="wxSearch-pancel">
     <input bindfocus="wxToSearchTap" value="{{wxSearchData.value}}" class="wxSearch-input" placeholder="搜索" bindtap="wxToSearchTap"/>
-    <!-- <button class="wxSearch-button" bindtap="wxToSearchTap" size="mini" plain="true">搜索</button> -->
   </view>
 </view>
-
+<!--轮播图，书籍推荐-->
 <view class="container">
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">
   <!--banner-->

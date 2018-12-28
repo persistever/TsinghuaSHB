@@ -1,4 +1,4 @@
-<!--pages/collect/collect.wxml-->
+<!--已购买书籍页面-->
 
 <view class="container">
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">

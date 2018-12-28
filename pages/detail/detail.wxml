@@ -1,4 +1,4 @@
-<!--pages/detail/detail.wxml-->
+<!--书籍详情显示页面.wxml-->
 
 <view class="book">
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">

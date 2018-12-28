@@ -1,4 +1,4 @@
-<!--pages/grade/grade.wxml-->
+<!--评分页面-->
 <view style="text-align: center;">
   <block wx:if="{{sellOrBuy==0}}"><text>给买家 {{theOtherUserNickName}} 打分</text></block>
   <block wx:elif="{{sellOrBuy==1}}"><text>给卖家 {{theOtherUserNickName}} 打分</text></block>

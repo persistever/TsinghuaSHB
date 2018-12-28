@@ -1,7 +1,6 @@
-<!--search.wxml-->
-
+<!--搜索页-->
 <import src="./wxSearch/wxSearch.wxml"/>
-
+<!--搜索框-->
 <view class="wxSearch-section">
   <view class="wxSearch-pancel">
     <input bindinput="wxSearchInput" bindfocus="wxSearchFocus" focus="true" 
@@ -10,6 +9,7 @@
     <button class="wxSearch-button" bindtap="wxSearchFn" size="mini" plain="true">搜索</button>
   </view>
 </view>
+<!--搜索记录及结果显示-->
 <template is="wxSearch" data="{{wxSearchData}}"/>
 <view hidden="{{searchBackHidden}}" class="nav_section">
       <view class="wxSearch-section">

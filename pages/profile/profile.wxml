@@ -1,4 +1,4 @@
-<!--pages/profile/profile.wxml-->
+<!--个人首页.wxml-->
 <view class="user-head">
     <view class="center">
         <view class="user-img">

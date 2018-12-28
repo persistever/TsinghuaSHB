@@ -1,6 +1,3 @@
-// pages/index/to_news/to_news.js
-//reference:
-//https://blog.csdn.net/qq_35713752/article/details/78688311
 var app = getApp()
 var util = require('../../utils/util.js')
 var message = ''

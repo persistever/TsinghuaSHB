@@ -1,5 +1,4 @@
-<!--pages/userSold/userSold.wxml-->
-<!--pages/collect/collect.wxml-->
+<!--已卖书籍页面-->
 
 <view class="container">
 <scroll-view  scroll-y="true"  class="page-body" bindscrolltolower="loadMore">

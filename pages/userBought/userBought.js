@@ -1,4 +1,3 @@
-// pages/collect/collect.js
 //获取应用实例
 var app = getApp()
 var fileData = require('../../utils/data.js')
