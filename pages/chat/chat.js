@@ -276,9 +276,9 @@ Page({
             messageNameList = wx.getStorageSync('messageNameList')
             //console.log('[chat.js][看messageName是否加入到messsageNameList当中12]')
             //console.log(messageNameList)
-            // that.setData({
-            //   timer: setInterval(that.checkMessage, that.data.tiemSecond)
-            // })
+            that.setData({
+              timer: setInterval(that.checkMessage, that.data.tiemSecond)
+            })
           }
 
           var messageListTemp = wx.getStorageSync(that.data.messageName)
