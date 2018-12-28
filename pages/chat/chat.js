@@ -163,7 +163,6 @@ Page({
         }
         else {
           var bid = null
-          var issold = null
           that.setData({
             confirmStatus:1
           })
@@ -186,7 +185,7 @@ Page({
               console.log('[chat.js][交易确认] success');
               console.log(res.data)
               that.setData({
-                issold: res.data['itemIsSold'],
+                itemIsSold: res.data['itemIsSold'],
                 buyerID: res.data['itemBuyerID']
               })
             },

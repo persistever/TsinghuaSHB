@@ -20,10 +20,10 @@
           <block wx:for-items="{{banner_url}}" wx:key="item.id">
               <swiper-item>
                 <block wx:if="{{item}}">
-                  <image src="{{item}}"  mode="aspectFill"/>
+                  <image src="{{item}}"  mode="scaleToFill"/>
                 </block>
                 <block wx:else>
-                  <image src="../../images/default_pic.png" mode="aspectFill"></image>
+                  <image src="../../images/default_pic.png" mode="scaleToFill"></image>
                 </block>
               </swiper-item>
           </block>
