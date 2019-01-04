@@ -210,7 +210,8 @@ Page({
                       })
                     } else {
                       wx.showToast({
-                        title: "由于您评分太低，已经被拉入系统黑名单，禁止登陆！请发邮件至：jiaxh17@mails.tsinghua.edu.cn申诉",
+                        title: "由于您评分太低，已经被拉入系统黑名单，禁止登陆！",
+                        content: "请发邮件至：jiaxh17@mails.tsinghua.edu.cn申诉",
                         icon: 'none',
                         duration: 10000
                       })
